@@ -1,10 +1,10 @@
 {
-  "name": "react-folio",
+  "name": "Salarium-Prototype",
   "version": "0.1.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "description": "A showcase of prototypes for upcoming Salarium features",
   "repository": {
     "type": "git",
-    "url": "git://github.com/xintaro/react-folio.git"
+    "url": "git://github.com/SalariumPH/salarium.git"
   },
   "engines": {
     "npm": ">=3"
