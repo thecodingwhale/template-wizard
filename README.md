@@ -11,7 +11,6 @@ The Salarium payroll, hris, attendance &amp; expenses modules. Does not include 
   - [**CLI Commands**](docs/general/commands.md)
   - [Tool Configuration](docs/general/files.md)
   - [Server Configurations](docs/general/server-configs.md)
-  - [Deployment](docs/general/deployment.md) *(currently Heroku specific)*
   - [FAQ](docs/general/faq.md)
   - [Gotchas](docs/general/gotchas.md)
   - [Remove](docs/general/remove.md)

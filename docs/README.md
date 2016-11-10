@@ -1,12 +1,12 @@
 # Documentation
 
 ## Table of Contents
-
+- [Setup Guide](setup)
+  - [Setting Up](setup/setup.md)
 - [General](general)
   - [**CLI Commands**](general/commands.md)
   - [Tool Configuration](general/files.md)
   - [Server Configurations](general/server-configs.md)
-  - [Deployment](general/deployment.md) *(currently Heroku specific)*
   - [FAQ](general/faq.md)
   - [Gotchas](general/gotchas.md)
   - [Remove](general/remove.md)
