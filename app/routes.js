@@ -18,6 +18,22 @@ export default function createRoutes(store) {
 
   return [
     {
+      path: '/styleguide',
+      name: 'styleguide',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/StyleGuide'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
