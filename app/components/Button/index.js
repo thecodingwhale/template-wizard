@@ -4,7 +4,27 @@ import styles from './styles.css';
 
 /**
 * Button
+*
+  let button =
+  <button
+    className={className}
+    href={props.href}
+    onClick={props.onClick}
+  >
+    {props.children}
+  </button>;
+
+  if (props.handleRoute) {
+    button =
+      <button
+      className={className}
+      onClick={props.handleRoute}
+    >
+      {props.children}
+    </button>;
+  }
 */
+
 function Button(props) {
   const className = cx(styles.base, {
     [styles.sizeSmall]: (props.size === 'small'),
@@ -16,6 +36,8 @@ function Button(props) {
   return (
     <button
       className={className}
+      href
+      handleRoute
       onClick={props.onClick}
     >
       {props.children}
