@@ -17,7 +17,10 @@ describe('<Button />', () => {
     const component = shallow(
       <Button></Button>
     );
-    const type = component.instance().props.type;
-    expect(type).toEqual('default');
+    const props = component.instance().props;
+    expect(props.size).toEqual('default');
+    expect(props.outline).toBe(false);
+    expect(props.type).toEqual('default');
+    expect(props.children).toEqual('Default Button');
   });
 });
