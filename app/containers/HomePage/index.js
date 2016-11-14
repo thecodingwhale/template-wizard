@@ -11,11 +11,21 @@
 
 import React from 'react';
 
+/**
+ * Class for home page.
+ *
+ * @class      HomePage (name)
+ */
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  render() {
-    return (
-      <div>TEST</div>
-    );
-  }
+    /**
+     * { renders display to the view }
+     *
+     * @return     {<type>}  { components to render in homepage }
+     */
+    render() {
+        return (
+            <div>TEST</div>
+        );
+    }
 }

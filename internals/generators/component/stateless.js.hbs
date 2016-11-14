@@ -16,17 +16,17 @@ import styles from './styles.css';
 {{/if}}
 
 function {{ properCase name }}() {
-  return (
-    {{#if wantCSS}}
-    <div className={{curly true}}styles.{{ camelCase name }}{{curly}}>
-    {{else}}
-    <div>
-    {{/if}}
-    {{#if wantMessages}}
-      <FormattedMessage {...messages.header} />
-    {{/if}}
-    </div>
-  );
+    return (
+        {{#if wantCSS}}
+        <div className={{curly true}}styles.{{ camelCase name }}{{curly}}>
+        {{else}}
+        <div>
+        {{/if}}
+            {{#if wantMessages}}
+            <FormattedMessage {...messages.header} />
+            {{/if}}
+        </div>
+    );
 }
 
 export default {{ properCase name }};

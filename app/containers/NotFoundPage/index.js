@@ -13,13 +13,22 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
+/**
+ * Class for not found.
+ *
+ * @class      NotFound (name)
+ */
 export default class NotFound extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  render() {
-    return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-    );
-  }
+    /**
+     * { render component(s) }
+     *
+     * @return     {component}  { component(s) to render }
+     */
+    render() {
+        return (
+            <h1>
+                <FormattedMessage { ...messages.header } />
+            </h1>
+        );
+    }
 }

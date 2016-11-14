@@ -9,7 +9,7 @@
   "engines": {
     "npm": ">=3"
   },
-  "author": "Edzon Labayan",
+  "author": "Salarium",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
@@ -85,108 +85,115 @@
     }
   },
   "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "env": {
-      "browser": true,
-      "node": true,
-      "mocha": true,
-      "es6": true
+        "parser": "babel-eslint",
+        "extends": "airbnb",
+        "env": {
+            "browser": true,
+            "node": true,
+            "mocha": true,
+            "es6": true
+        },
+        "plugins": [
+            "react",
+            "jsx-a11y"
+        ],
+        "parserOptions": {
+            "ecmaVersion": 6,
+            "sourceType": "module",
+            "ecmaFeatures": { "jsx": true }
+        },
+        "rules": {
+            "array-bracket-spacing": ["error", "always", { "singleValue": false, "objectsInArrays": false, "arraysInArrays": false }],
+            "arrow-parens": ["error", "always"],
+            "arrow-body-style": [2, "as-needed"],
+            "class-methods-use-this": 0,
+            "comma-dangle": [2, "never"],
+            "comma-spacing": ["error", { "before": false, "after": true }],
+            "comma-style": ["error", "last"],
+            "computed-property-spacing": ["error", "always"],
+            "import/imports-first": 0,
+            "import/newline-after-import": 0,
+            "import/no-extraneous-dependencies": 0,
+            "import/no-named-as-default": 0,
+            "import/no-unresolved": 2,
+            "import/prefer-default-export": 0,
+            "indent": [2, 4, { "SwitchCase": 1 }],
+            "jsx-a11y/aria-props": 2,
+            "jsx-a11y/heading-has-content": 0,
+            "jsx-a11y/href-no-hash": 2,
+            "jsx-a11y/label-has-for": 2,
+            "jsx-a11y/mouse-events-have-key-events": 2,
+            "jsx-a11y/role-has-required-aria-props": 2,
+            "jsx-a11y/role-supports-aria-props": 2,
+            "max-len": 0,
+            "newline-per-chained-call": 0,
+            "no-console": 1,
+            "no-duplicate-imports": "error",
+            "no-extra-semi": "error",
+            "no-lonely-if": "error",
+            "no-multiple-empty-lines": ["error", { "max": 1 }],
+            "no-trailing-spaces": "error",
+            "no-unneeded-ternary": "error",
+            "no-use-before-define": 0,
+            "no-useless-constructor": "error",
+            "no-var": "error",
+            "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }],
+            "prefer-arrow-callback": "error",
+            "prefer-const": "error",
+            "prefer-template": 2,
+            "react/forbid-prop-types": 0,
+            "react/jsx-curly-spacing": [2, "always"],
+            "react/jsx-first-prop-new-line": [2, "multiline"],
+            "react/jsx-indent": [2, 4],
+            "react/jsx-indent-props": [2, 4],
+            "react/jsx-filename-extension": 0,
+            "react/jsx-no-target-blank": 0,
+            "react/require-extension": 0,
+            "react/self-closing-comp": 0,
+            "require-yield": 0,
+            "require-jsdoc": ["error", {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true
+                }
+            }],
+            "semi-spacing": ["error", { "before": false, "after": true }],
+            "space-in-parens": ["error", "always", { "exceptions": ["{}", "[]", "empty"] }]
+        },
+        "settings": {
+            "import/resolver": {
+                "webpack": {
+                    "config": "./internals/webpack/webpack.test.babel.js"
+                }
+            }
+        }
     },
-    "plugins": [
-      "react",
-      "jsx-a11y"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
+    "stylelint": {
+        "extends": "stylelint-config-standard",
+        "rules": {
+            "color-hex-case": "upper",
+            "string-quotes": "single",
+            "font-family-name-quotes": "always-where-recommended",
+            "selector-pseudo-class-no-unknown": [
+                true,
+                {
+                    "ignorePseudoClasses": [
+                        "global"
+                    ]
+                }
+            ],
+            "property-no-unknown": [
+                true,
+                {
+                    "ignoreProperties": [
+                        "composes"
+                    ]
+                }
+            ],
+            "indentation": 4
+        }
     },
-    "rules": {
-      "arrow-parens": [
-        "error",
-        "always"
-      ],
-      "arrow-body-style": [
-        2,
-        "as-needed"
-      ],
-      "comma-dangle": [
-        2,
-        "always-multiline"
-      ],
-      "import/imports-first": 0,
-      "import/newline-after-import": 0,
-      "import/no-extraneous-dependencies": 0,
-      "import/no-named-as-default": 0,
-      "import/no-unresolved": 2,
-      "import/prefer-default-export": 0,
-      "indent": [
-        2,
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
-      "jsx-a11y/aria-props": 2,
-      "jsx-a11y/heading-has-content": 0,
-      "jsx-a11y/href-no-hash": 2,
-      "jsx-a11y/label-has-for": 2,
-      "jsx-a11y/mouse-events-have-key-events": 2,
-      "jsx-a11y/role-has-required-aria-props": 2,
-      "jsx-a11y/role-supports-aria-props": 2,
-      "max-len": 0,
-      "newline-per-chained-call": 0,
-      "no-console": 1,
-      "no-use-before-define": 0,
-      "prefer-template": 2,
-      "class-methods-use-this": 0,
-      "react/forbid-prop-types": 0,
-      "react/jsx-first-prop-new-line": [
-        2,
-        "multiline"
-      ],
-      "react/jsx-filename-extension": 0,
-      "react/jsx-no-target-blank": 0,
-      "react/require-extension": 0,
-      "react/self-closing-comp": 0,
-      "require-yield": 0
-    },
-    "settings": {
-      "import/resolver": {
-        "webpack": {
-          "config": "./internals/webpack/webpack.test.babel.js"
-        }
-      }
-    }
-  },
-  "stylelint": {
-    "extends": "stylelint-config-standard",
-    "rules": {
-      "color-hex-case": "upper",
-      "string-quotes": "single",
-      "font-family-name-quotes": "always-where-recommended",
-      "selector-pseudo-class-no-unknown": [
-        true,
-        {
-          "ignorePseudoClasses": [
-            "global"
-          ]
-        }
-      ],
-      "property-no-unknown": [
-        true,
-        {
-          "ignoreProperties": [
-            "composes"
-          ]
-        }
-      ],
-      "indentation": 2
-    }
-  },
   "dllPlugin": {
     "path": "node_modules/react-boilerplate-dlls",
     "exclude": [
@@ -283,6 +290,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "1.8.0",
     "lint-staged": "3.0.2",
+    "material-ui": "^0.16.1",
     "mocha": "3.0.2",
     "ngrok": "2.2.2",
     "null-loader": "0.1.1",
