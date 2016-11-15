@@ -15,17 +15,28 @@ import React from 'react';
 
 import styles from './styles.css';
 
+/**
+ * Class for application.
+ *
+ * @class      App
+ * Main application to run the salarium application
+ */
 export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    children: React.PropTypes.node,
-  };
+    static propTypes = {
+        children: React.PropTypes.node
+    };
 
-  render() {
-    return (
-      <div className={styles.container}>
-        {React.Children.toArray(this.props.children)}
-      </div>
-    );
-  }
+    /**
+     * { renders components into view }
+     *
+     * @return     {<type>}  { components to display }
+     */
+    render() {
+        return (
+            <div className={ styles.container }>
+                {React.Children.toArray( this.props.children )}
+            </div>
+        );
+    }
 }

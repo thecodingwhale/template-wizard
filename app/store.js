@@ -9,43 +9,50 @@ import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
-const devtools = window.devToolsExtension || (() => (noop) => noop);
+const devtools = window.devToolsExtension || ( () => ( noop ) => noop );
 
-export default function configureStore(initialState = {}, history) {
+/**
+ * { initialize a store for the react application }
+ *
+ * @param      {state}    initialState  The initial state
+ * @param      {history}    history       browsing history
+ * @return     {store}  return store
+ */
+export default function configureStore( initialState = {}, history ) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [
-    sagaMiddleware,
-    routerMiddleware(history),
-  ];
+    const middlewares = [
+        sagaMiddleware,
+        routerMiddleware( history )
+    ];
 
-  const enhancers = [
-    applyMiddleware(...middlewares),
-    devtools(),
-  ];
+    const enhancers = [
+        applyMiddleware( ...middlewares ),
+        devtools()
+    ];
 
-  const store = createStore(
+    const store = createStore(
     createReducer(),
-    fromJS(initialState),
-    compose(...enhancers)
+    fromJS( initialState ),
+    compose( ...enhancers )
   );
 
   // Create hook for async sagas
-  store.runSaga = sagaMiddleware.run;
+    store.runSaga = sagaMiddleware.run;
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
-  if (module.hot) {
-    System.import('./reducers').then((reducerModule) => {
-      const createReducers = reducerModule.default;
-      const nextReducers = createReducers(store.asyncReducers);
+    if ( module.hot ) {
+        System.import( './reducers' ).then( ( reducerModule ) => {
+            const createReducers = reducerModule.default;
+            const nextReducers = createReducers( store.asyncReducers );
 
-      store.replaceReducer(nextReducers);
-    });
-  }
+            store.replaceReducer( nextReducers );
+        });
+    }
 
   // Initialize it with no other reducers
-  store.asyncReducers = {};
-  return store;
+    store.asyncReducers = {};
+    return store;
 }
