@@ -24,6 +24,19 @@ export default function createRoutes( store ) {
 
     return [
         {
+            path: '/template-wizard',
+            name: 'template-wizard',
+            getComponent( nextState, cb ) {
+                const importModules = Promise.all([
+                    System.import( 'containers/TemplateWizard' )
+                ]);
+                const renderRoute = loadModule( cb );
+                importModules.then( ([component]) => {
+                    renderRoute( component );
+                });
+                importModules.catch( errorLoading );
+            }
+        }, {
             path: '/styleguide',
             name: 'styleguide',
             getComponent( nextState, cb ) {
