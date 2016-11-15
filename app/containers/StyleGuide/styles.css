@@ -3,8 +3,8 @@
 @value fontColor from colors;
 
 .styleGuide {
-  background: #F4F4F4;
-  height: 100vh;
+    background: #F4F4F4;
+    height: 100vh;
 }
 
 .content {
@@ -19,7 +19,7 @@
 
 .blockContent {
     width: 420px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .pageTitle {
@@ -30,9 +30,8 @@
 }
 
 .optionTitle {
-    font-weight: bold;
     margin-bottom: 10px;
-    font-weight: 100;
+    font-weight: bold;
     color: fontColor;
 }
 

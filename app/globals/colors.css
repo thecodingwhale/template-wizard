@@ -1,5 +1,14 @@
+/**
+button: #00A5E5
+font-color: #4e4e4e
+secondary font-color: #95989A
+header nav bg-color: #1F2331
+secondary nav bg-color: #E5E5E5
+*/
+
 @value white: #ffffff;
-@value gray: #E6E6E6;
+@value gray: #a9a9a9;
 @value grayHover: #E6E6E6;
-@value primary: #00ABF0;
+@value primary: #00A5E5;
 @value primaryHover: #0187BD;
+@value fontColor: #4E4E4E;
