@@ -1,0 +1,20 @@
+.topBar {
+    padding: 15px;
+    background-color: #E5E5E5;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: #4E4E4E;
+    float: left;
+}
+
+.rightContent {
+    float: right;
+    margin-top: 1px;
+}
