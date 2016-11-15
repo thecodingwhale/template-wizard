@@ -1,10 +1,41 @@
+/* import your colors... */
+@value colors: '../../globals/colors.css';
+@value fontColor from colors;
+
 .styleGuide {
   background: #F4F4F4;
   height: 100vh;
 }
 
+.content {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.section {
+    background-color: #FAFAFA;
+    padding: 20px;
+}
+
+.blockContent {
+    width: 420px;
+    margin-bottom: 30px;
+}
+
 .pageTitle {
-  padding: 0.67em 0;
-  margin: 0;
-  font-weight: 100;
+    padding: 0.67em 0;
+    margin: 0;
+    font-weight: 100;
+    color: fontColor;
+}
+
+.optionTitle {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: fontColor;
+}
+
+.buttonGroup button {
+    margin-bottom: 12px;
 }
