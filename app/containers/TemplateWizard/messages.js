@@ -8,6 +8,6 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
     header: {
         id: 'app.containers.TemplateWizard.header',
-        defaultMessage: 'This is TemplateWizard container !'
+        defaultMessage: 'Template Wizard'
     }
 });

@@ -3,7 +3,11 @@ import {
     DEFAULT_ACTION
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+    templateWizard: {
+        message: 'Hello World!'
+    }
+});
 
 /**
  * TemplateWizard reducer

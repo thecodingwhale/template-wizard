@@ -25,13 +25,17 @@ export default function createRoutes( store ) {
     return [
         {
             path: '/template-wizard',
-            name: 'template-wizard',
+            name: 'templateWizard',
             getComponent( nextState, cb ) {
                 const importModules = Promise.all([
+                    System.import( 'containers/TemplateWizard/reducer' ),
+                    System.import( 'containers/TemplateWizard/sagas' ),
                     System.import( 'containers/TemplateWizard' )
                 ]);
                 const renderRoute = loadModule( cb );
-                importModules.then( ([component]) => {
+                importModules.then( ([ reducer, sagas, component ]) => {
+                    injectReducer( 'templateWizard', reducer.default );
+                    injectSagas( sagas.default );
                     renderRoute( component );
                 });
                 importModules.catch( errorLoading );

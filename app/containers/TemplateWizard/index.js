@@ -1,15 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+// import { FormattedMessage } from 'react-intl';
 import selectTemplateWizard from './selectors';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+// import messages from './messages';
 import styles from './styles.css';
+
+import TopBar from '../../components/TopBar';
+import Button from '../../components/Button';
 
 /**
  * TemplateWizard
  */
-export class TemplateWizard extends React.Component {
+class TemplateWizard extends React.Component {
+    /**
+    * renderTopBar()
+    */
+    renderTopBar() {
+        // let title = <FormattedMessage { ...messages.header } />;
+        return (
+            <div>
+                <TopBar title="Template Wizard">
+                    <Button type="primary" size="large" outline>PDF PREVIEW</Button>
+                    <Button type="primary" size="large">SAVE</Button>
+                </TopBar>
+            </div>
+        );
+    }
     /**
     * render()
     */
@@ -25,7 +42,7 @@ export class TemplateWizard extends React.Component {
                         }
                     ] }
                 />
-                <FormattedMessage { ...messages.header } />
+                { this.renderTopBar() }
             </div>
         );
     }
