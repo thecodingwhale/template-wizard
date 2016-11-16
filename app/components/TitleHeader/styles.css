@@ -1,0 +1,8 @@
+/* import your colors... */
+@value colors: '../../globals/colors.css';
+@value fontColor from colors;
+
+.base {
+    color: fontColor;
+    font-weight: normal;
+}
