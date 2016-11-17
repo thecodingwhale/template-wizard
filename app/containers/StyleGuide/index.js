@@ -78,7 +78,7 @@ export default class StyleGuide extends React.Component {
     renderButtons() {
         return (
             <div className={ styles.content }>
-                <h1 className={ styles.pageTitle }>Buttons</h1>
+                <h1 className={ styles.pageTitle }>Button</h1>
                 <div className={ styles.section }>
                     <p>
                         <Button />
@@ -100,8 +100,8 @@ export default class StyleGuide extends React.Component {
     renderButtonLists() {
         return (
             <div className={ styles.content }>
+                <h1 className={ styles.pageTitle }>Button Group</h1>
                 <div className={ styles.section }>
-                    <h1 className={ styles.pageTitle }>Button Group</h1>
                     <div className={ styles.blockContent }>
                         <ButtonGroup>
                             <Button type="primary">Employee Name</Button>

@@ -42,7 +42,9 @@ export default class App extends React.Component { // eslint-disable-line react/
                     <div className={ styles.subMenu }>
 
                     </div>
-                    {React.Children.toArray( this.props.children )}
+                    <div className={ styles.content }>
+                        {React.Children.toArray( this.props.children )}
+                    </div>
                 </div>
             </div>
         );
