@@ -5,7 +5,7 @@
 .sidebar {
     position: absolute;
     background-color: sidebarBgColor;
-    height: calc(100% - 75px);
+    height: calc(100% - 177px);
     width: 100%;
     max-width: 420px;
 }

@@ -4,7 +4,7 @@
 
 .base {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 8px 14px;
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
@@ -63,7 +63,7 @@
 }
 
 .sizeSmall {
-    padding: 3px 8px;
+    padding: 5px 10px;
     font-size: 12px;
     line-height: 1.5;
     border-radius: 12px;
