@@ -4,13 +4,11 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 describe( '<TopBar />', () => {
-    it( 'renders a <h1> for the title', () => {
+    it( 'should render one <TitleHeader /> components by default', () => {
         const component = shallow(
             <TopBar />
         );
-        expect(
-            component.find( 'h1' ).node
-        ).toExist();
+        expect( component.find( 'TitleHeader' ).length ).toEqual( 1 );
     });
 
     it( 'should have a prop title and default string must be "Default TopBar Title"', () => {

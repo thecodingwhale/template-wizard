@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles.css';
+import TitleHeader from '../TitleHeader';
 
 /**
 * TopBar
@@ -7,9 +8,16 @@ import styles from './styles.css';
 function TopBar( props ) {
     return (
         <div className={ styles.topBar }>
-            <h1 className={ styles.title }>
-                { props.title }
-            </h1>
+            <div className={ styles.title }>
+                <TitleHeader
+                    type="h4"
+                    style={ {
+                        margin: '0'
+                    } }
+                >
+                    { props.title }
+                </TitleHeader>
+            </div>
             <div className={ styles.rightContent }>
                 { props.children }
             </div>
