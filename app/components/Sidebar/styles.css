@@ -1,9 +1,13 @@
+/* import your colors... */
+@value colors: '../../globals/colors.css';
+@value sidebarBgColor, fontColor from colors;
+
 .sidebar {
     position: absolute;
-    background-color: #F8F8F8;
+    background-color: sidebarBgColor;
     height: calc(100% - 75px);
     width: 100%;
-    max-width: 300px;
+    max-width: 420px;
 }
 
 .sidebarRight {
@@ -18,7 +22,7 @@
     line-height: 76px;
     font-weight: normal;
     font-size: 20px;
-    background-color: #4A4A4A;
+    background-color: fontColor;
 }
 
 .content {

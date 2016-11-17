@@ -1,16 +1,18 @@
+/* import your colors... */
+@value colors: '../../globals/colors.css';
+@value fontColor, secondaryNavBgColor from colors;
+
 .topBar {
     padding: 15px;
-    background-color: #E5E5E5;
+    background-color: secondaryNavBgColor;
     overflow: hidden;
 }
 
 .title {
     font-size: 1.2em;
-    line-height: 1.2em;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-weight: 300;
-    color: #4E4E4E;
+    color: fontColor;
     float: left;
 }
 
