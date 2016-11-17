@@ -3,7 +3,25 @@
  *
  * App container styles
  */
+.layout {
+    background-color: #F4F4F4;
+}
+
+.mainMenu {
+    width: 120px;
+    height: 100vh;
+    border-right: 1px solid #F4F4F4;
+    background-color: #FFF;
+    float: left;
+}
+
+.subMenu {
+    height: 102px;
+    background-color: #1F2331;
+}
 
 .container {
     display: block;
+    overflow: hidden;
+    height: 100vh;
 }
