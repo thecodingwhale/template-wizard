@@ -1,8 +1,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styles from './styles.css';
+
 import Button from  '../../components/Button'; // eslint-disable-line no-multi-spaces
+import ButtonGroup from  '../../components/ButtonGroup'; // eslint-disable-line no-multi-spaces
 import TopBar from  '../../components/TopBar'; // eslint-disable-line no-multi-spaces
+import TitleHeader from  '../../components/TitleHeader'; // eslint-disable-line no-multi-spaces
 
 /**
 * StyleGuide
@@ -27,6 +30,43 @@ export default class StyleGuide extends React.Component {
                                 SAVE
                             </Button>
                         </TopBar>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    /**
+        * renderButtons()
+    */
+    renderTypography() {
+        return (
+            <div>
+                <div className={ styles.content }>
+                    <h1 className={ styles.pageTitle }>
+                        Typography
+                    </h1>
+                    <div className={ styles.section }>
+                        <TitleHeader bold>
+                            Header 1
+                        </TitleHeader>
+                        <TitleHeader type="h2">
+                            Header 2
+                        </TitleHeader>
+                        <TitleHeader
+                            type="h3"
+                            bold
+                        >
+                            Header 3
+                        </TitleHeader>
+                        <TitleHeader type="h4">
+                            Header 4
+                        </TitleHeader>
+                        <TitleHeader type="h5">
+                            Header 5
+                        </TitleHeader>
+                        <TitleHeader type="h6">
+                            Header 6
+                        </TitleHeader>
                     </div>
                 </div>
             </div>
@@ -60,13 +100,10 @@ export default class StyleGuide extends React.Component {
     renderButtonLists() {
         return (
             <div className={ styles.content }>
-                <h1 className={ styles.pageTitle }>Payslip Button Option Lists</h1>
                 <div className={ styles.section }>
+                    <h1 className={ styles.pageTitle }>Button Group</h1>
                     <div className={ styles.blockContent }>
-                        <div className={ styles.optionTitle }>
-                            Employee Details
-                        </div>
-                        <div className={ styles.buttonGroup }>
+                        <ButtonGroup>
                             <Button type="primary">Employee Name</Button>
                             <Button type="primary">Employee ID</Button>
                             <Button type="primary">Gender</Button>
@@ -77,24 +114,7 @@ export default class StyleGuide extends React.Component {
                             <Button>Email</Button>
                             <Button>Address</Button>
                             <Button>Zip</Button>
-                        </div>
-                    </div>
-                    <div className={ styles.blockContent }>
-                        <div className={ styles.optionTitle }>
-                            Employee Details
-                        </div>
-                        <div className={ styles.buttonGroup }>
-                            <Button type="primary">Employee Name</Button>
-                            <Button type="primary">Employee ID</Button>
-                            <Button type="primary">Gender</Button>
-                            <Button type="primary">Photo</Button>
-                            <Button>Birth Date</Button>
-                            <Button>Mobile</Button>
-                            <Button>Telephone</Button>
-                            <Button>Email</Button>
-                            <Button>Address</Button>
-                            <Button>Zip</Button>
-                        </div>
+                        </ButtonGroup>
                     </div>
                 </div>
             </div>
@@ -113,6 +133,7 @@ export default class StyleGuide extends React.Component {
                     ] }
                 />
                 { this.renderTopBar() }
+                { this.renderTypography() }
                 { this.renderButtons() }
                 { this.renderButtonLists() }
             </div>

@@ -6,8 +6,11 @@ import selectTemplateWizard from './selectors';
 // import messages from './messages';
 import styles from './styles.css';
 
-import TopBar from '../../components/TopBar';
-import Button from '../../components/Button';
+import TopBar from '../../components/TopBar'; // eslint-disable-line no-multi-spaces
+import ButtonGroup from '../../components/ButtonGroup'; // eslint-disable-line no-multi-spaces
+import Button from '../../components/Button'; // eslint-disable-line no-multi-spaces
+import Sidebar from  '../../components/Sidebar'; // eslint-disable-line no-multi-spaces
+import TitleHeader from  '../../components/TitleHeader'; // eslint-disable-line no-multi-spaces
 
 /**
  * TemplateWizard
@@ -28,6 +31,58 @@ class TemplateWizard extends React.Component {
         );
     }
     /**
+    * renderLeftSidebar()
+    */
+    renderLeftSidebar() {
+        return (
+            <Sidebar>
+                <TitleHeader
+                    bold
+                    type="h4"
+                >
+                    Employee Details
+                </TitleHeader>
+                <ButtonGroup>
+                    <Button type="primary">Employee Name</Button>
+                    <Button type="primary">Employee ID</Button>
+                    <Button type="primary">Gender</Button>
+                    <Button type="primary">Photo</Button>
+                    <Button>Birth Date</Button>
+                    <Button>Mobile</Button>
+                    <Button>Telephone</Button>
+                    <Button>Email</Button>
+                    <Button>Address</Button>
+                    <Button>Zip</Button>
+                </ButtonGroup>
+            </Sidebar>
+        );
+    }
+    /**
+    * renderRightSidebar()
+    */
+    renderRightSidebar() {
+        return (
+            <Sidebar
+                title="Templates"
+                position="right"
+            >
+
+            </Sidebar>
+        );
+    }
+    /**
+    * renderTemplateEditor()
+    */
+    renderTemplateEditor() {
+        return (
+            <div>
+                { this.renderTopBar() }
+                { this.renderLeftSidebar() }
+                { this.renderRightSidebar() }
+            </div>
+        );
+    }
+    /**
     * render()
     */
     render() {
@@ -42,7 +97,7 @@ class TemplateWizard extends React.Component {
                         }
                     ] }
                 />
-                { this.renderTopBar() }
+                { this.renderTemplateEditor() }
             </div>
         );
     }

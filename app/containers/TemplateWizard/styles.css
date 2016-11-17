@@ -1,3 +1,7 @@
 .templateWizard { /* stylelint-disable */
 
 }
+
+.buttonGroup button {
+    margin-bottom: 12px;
+}
