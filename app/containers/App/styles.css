@@ -3,6 +3,11 @@
  *
  * App container styles
  */
+
+:root {
+    font-family: 'Source Sans Pro';
+}
+
 .layout {
     background-color: #F4F4F4;
 }
