@@ -52,7 +52,7 @@
     "*.js": "lint:eslint",
     "*.css": "stylelint"
   },
-  "pre-commit": "lint:staged",
+  "pre-commit": "test",
   "babel": {
     "presets": [
       [
