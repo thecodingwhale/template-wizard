@@ -57,4 +57,41 @@ describe( '<TitleHeader />', () => {
         expect( props.type ).toEqual( 'h6' );
         expect( component.find( 'h6' ).length ).toEqual( 1 );
     });
+
+    it( 'should have a prop key "style" and default value should be an empty object', () => {
+        const component = shallow(
+            <TitleHeader></TitleHeader>
+        );
+        const props = component.instance().props;
+        expect( props.style ).toEqual({});
+    });
+
+    it( 'should accept and match the pass style object', () => {
+        const styles = {
+            fontWeight: 'bold'
+        };
+        const component = shallow(
+            <TitleHeader style={ { styles } }>
+                Header 1
+            </TitleHeader>
+        );
+        const props = component.instance().props;
+        expect( props.style ).toEqual({ styles });
+    });
+
+    it( 'should have a prop key of "bold" and default value should be false', () => {
+        const component = shallow(
+            <TitleHeader></TitleHeader>
+        );
+        const props = component.instance().props;
+        expect( props.bold ).toEqual( false );
+    });
+
+    it( 'should be return a header with a bold styling', () => {
+        const component = shallow(
+            <TitleHeader bold></TitleHeader>
+        );
+        const props = component.instance().props;
+        expect( props.bold ).toEqual( true );
+    });
 });
