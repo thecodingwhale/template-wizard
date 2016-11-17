@@ -1,13 +1,22 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './styles.css';
+import TitleHeader from '../TitleHeader';
 
 /**
 * renderTitleBar
 */
 function renderTitleBar( title ) {
     return ( title !== '' ) ? <div className={ styles.title }>
-        { title }
+        <TitleHeader
+            type="h4"
+            style={ {
+                margin: '0',
+                color: '#FAFAFA'
+            } }
+        >
+            { title }
+        </TitleHeader>
     </div> : '';
 }
 
