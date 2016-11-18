@@ -23,21 +23,25 @@ class TemplateWizard extends React.Component {
     constructor( props ) {
         super( props );
         this.state = {
+            isTemplateWizardOpen: false,
+            isLayoutOptionsOpen: false,
             layouts: [],
-            templates: [],
+            templates: []
         };
     }
-    componentWillReceiveProps(nextProps) {
+    /**
+    * componentWillReceiveProps()
+    */
+    componentWillReceiveProps( nextProps ) {
         this.setState({
-            layouts: nextProps.templateWizard.layouts,
             templates: nextProps.templateWizard.templates,
-        })
+            layouts: nextProps.templateWizard.layouts
+        });
     }
     /**
     * componentDidMount()
     */
     componentDidMount() {
-        this.props.loadLayouts();
         this.props.loadTemplates();
     }
     /**
@@ -45,11 +49,22 @@ class TemplateWizard extends React.Component {
     */
     renderTopBar() {
         // let title = <FormattedMessage { ...messages.header } />;
+        const { isTemplateWizardOpen } = this.state;
         return (
             <div>
                 <TopBar title="Template Wizard">
-                    <Button type="primary" size="large" outline>PDF PREVIEW</Button>
-                    <Button type="primary" size="large">SAVE</Button>
+                    {isTemplateWizardOpen
+                        ? (
+                            <div>
+                                <Button type="primary" size="large" outline>
+                                    PDF PREVIEW
+                                </Button>
+                                <Button type="primary" size="large">
+                                    SAVE
+                                </Button>
+                            </div>
+                        )
+                        : null}
                 </TopBar>
             </div>
         );
@@ -129,18 +144,72 @@ class TemplateWizard extends React.Component {
             </div>
         );
     }
+    /**
+    * viewAvailableTemplateLayouts()
+    */
+    viewAvailableTemplateLayouts() {
+        this.setState({
+            isLayoutOptionsOpen: true
+        });
+        this.props.loadLayouts();
+    }
+    /**
+    * selectTemplate()
+    */
+    selectTemplate(layout, e) {
+        e.preventDefault();
+        this.setState({
+            isTemplateWizardOpen: true
+        });
+    }
+    /**
+    * renderCreateTemplate()
+    */
     renderCreateTemplate() {
-        return (
-            <div>
-                Create Template
-            </div>
-        )
+        const { isLayoutOptionsOpen, layouts } = this.state;
+        if (isLayoutOptionsOpen) {
+            return (
+                <div>
+                    { this.renderTopBar() }
+                    <div>
+                        <TitleHeader type="h2">
+                            Templates
+                        </TitleHeader>
+                        <div>
+                            {layouts.map((layout, index) => (
+                                <div
+                                    key={index}
+                                    className={ styles.boxTemplate }
+                                    onClick={this.selectTemplate.bind(this, layout)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <p>
+                        Hooray! You can create your payslip here!
+                    </p>
+                    <Button
+                        type="primary"
+                        onClick={::this.viewAvailableTemplateLayouts}
+                    >
+                        Create
+                    </Button>
+                </div>
+            )
+        }
+
     }
     /**
     * render()
     */
     render() {
-        const { layouts, templates } = this.state;
+        const { isTemplateWizardOpen } = this.state;
         return (
             <div className={ styles.templateWizard }>
                 <Helmet
@@ -152,9 +221,7 @@ class TemplateWizard extends React.Component {
                         }
                     ] }
                 />
-                {templates.length == 0
-                    ? this.renderCreateTemplate()
-                    : this.renderTemplateEditor()}
+                {isTemplateWizardOpen ? this.renderTemplateEditor() : this.renderCreateTemplate()}
             </div>
         );
     }

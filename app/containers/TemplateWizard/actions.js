@@ -11,14 +11,14 @@ export function defaultAction() {
     };
 }
 
-export function loadLayouts() {
-    return {
-        type: 'LOAD_LAYOUTS'
-    };
-}
-
 export function loadTemplates() {
     return {
         type: 'LOAD_TEMPLATES'
+    };
+}
+
+export function loadLayouts() {
+    return {
+        type: 'LOAD_LAYOUTS'
     };
 }

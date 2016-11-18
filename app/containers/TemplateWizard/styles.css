@@ -5,3 +5,18 @@
 .buttonGroup button {
     margin-bottom: 12px;
 }
+
+.boxTemplate {
+    position: relative;
+    background-color: #ffffff;
+    width: 350px;
+    height: 450px;
+    float: left;
+    margin-right: 50px;
+
+    &:hover {
+        cursor: pointer;
+        top: -5px;
+        box-shadow: 0px 10px 22px 0px rgba(0,0,0,0.12);
+    }
+}
