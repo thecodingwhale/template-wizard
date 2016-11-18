@@ -5,7 +5,8 @@ import {
 
 const initialState = fromJS({
     templateWizard: {
-        message: 'Hello World!'
+        layouts: [],
+        templates: []
     }
 });
 
@@ -16,6 +17,10 @@ function templateWizardReducer( state = initialState, action ) {
     switch ( action.type ) {
         case DEFAULT_ACTION:
             return state;
+        case 'LAYOUTS_LOADED':
+            return state.setIn(['templateWizard', 'layouts'], action.request.layouts);
+        case 'TEMPLATES_LOADED':
+            return state.setIn(['templateWizard', 'templates'], action.request.templates);
         default:
             return state;
     }

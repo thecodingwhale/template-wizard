@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // import { FormattedMessage } from 'react-intl';
 import selectTemplateWizard from './selectors';
+import * as TemplateWizardActions from './actions';
 // import messages from './messages';
 import styles from './styles.css';
-
+import {bindActionCreators} from 'redux';
 import TopBar from '../../components/TopBar'; // eslint-disable-line no-multi-spaces
 import ButtonGroup from '../../components/ButtonGroup'; // eslint-disable-line no-multi-spaces
 import Button from '../../components/Button'; // eslint-disable-line no-multi-spaces
@@ -16,6 +17,29 @@ import TitleHeader from  '../../components/TitleHeader'; // eslint-disable-line 
  * TemplateWizard
  */
 class TemplateWizard extends React.Component {
+    /**
+    * constructor()
+    */
+    constructor( props ) {
+        super( props );
+        this.state = {
+            layouts: [],
+            templates: [],
+        };
+    }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            layouts: nextProps.templateWizard.layouts,
+            templates: nextProps.templateWizard.templates,
+        })
+    }
+    /**
+    * componentDidMount()
+    */
+    componentDidMount() {
+        this.props.loadLayouts();
+        this.props.loadTemplates();
+    }
     /**
     * renderTopBar()
     */
@@ -74,18 +98,49 @@ class TemplateWizard extends React.Component {
     * renderTemplateEditor()
     */
     renderTemplateEditor() {
+        const paneStyle = {
+            width: '20%',
+            display: 'block',
+            minHeight: '30px',
+            boxSizing: 'border-box',
+            float: 'left',
+        };
+        const mainStyle = {
+            width: '60%',
+            display: 'block',
+            minHeight: '30px',
+            boxSizing: 'border-box',
+            float: 'left',
+        }
         return (
             <div>
                 { this.renderTopBar() }
-                { this.renderLeftSidebar() }
-                { this.renderRightSidebar() }
+                <div>
+                    <div style={ paneStyle }>
+                        { this.renderLeftSidebar() }
+                    </div>
+                    <div style={ mainStyle }>
+                        asdasdasd
+                    </div>
+                    <div style={ paneStyle }>
+                        { this.renderRightSidebar() }
+                    </div>
+                </div>
             </div>
         );
+    }
+    renderCreateTemplate() {
+        return (
+            <div>
+                Create Template
+            </div>
+        )
     }
     /**
     * render()
     */
     render() {
+        const { layouts, templates } = this.state;
         return (
             <div className={ styles.templateWizard }>
                 <Helmet
@@ -97,7 +152,9 @@ class TemplateWizard extends React.Component {
                         }
                     ] }
                 />
-                { this.renderTemplateEditor() }
+                {templates.length == 0
+                    ? this.renderCreateTemplate()
+                    : this.renderTemplateEditor()}
             </div>
         );
     }
@@ -109,9 +166,7 @@ const mapStateToProps = selectTemplateWizard();
 * mapDispatchToProps()
 */
 function mapDispatchToProps( dispatch ) {
-    return {
-        dispatch
-    };
+    return bindActionCreators(TemplateWizardActions, dispatch);
 }
 
 export default connect(

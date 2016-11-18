@@ -3,11 +3,8 @@
 @value sidebarBgColor, fontColor from colors;
 
 .sidebar {
-    position: absolute;
     background-color: sidebarBgColor;
-    height: calc(100% - 177px);
-    width: 100%;
-    max-width: 420px;
+    height: calc(100vh - 177px);
 }
 
 .sidebarRight {
