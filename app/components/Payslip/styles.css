@@ -1,9 +1,14 @@
+@value gray: #E5E5E5;
+
+@value borderColor: gray;
+@value fontColor: #a5a5a5;
+
 .base { /* stylelint-disable */
     width: 520px;
     display: block;
     background: #ffffff;
     min-height: 620px;
-    border: 1px solid #f4f4f4;
+    border: 1px solid borderColor;
     box-shadow: 0px 10px 22px 0px rgba(0,0,0,0.12);
     margin: 0 auto;
     padding-left: 30px;
@@ -17,22 +22,22 @@
     display: block;
 }
 
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: borderColor;
+    border-radius: 50%;
+    float: right;
+}
+
 .bordered {
-    border-bottom: 1px solid #f4f4f4;
+    border-bottom: 1px solid borderColor;
     overflow: hidden;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .title {
     line-height: 50px;
-}
-
-.avatar {
-    width: 50px;
-    height: 50px;
-    background-color: #f4f4f4;
-    border-radius: 50%;
-    float: right;
 }
 
 .half {
@@ -43,37 +48,43 @@
     float: left;
 }
 
-.smallTitle {
-    font-size: .7em;
-    line-height: 1;
-}
-
-.contentTitle {
-    font-size: .9em;
+.verticalLine {
+    border-left: 1px solid borderColor;
+    min-height: 520px;
+    padding-left: 9px;
 }
 
 .content {
-    padding-top: 15px;
+    padding-top: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.listUnstyled {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+.description div {
+    display: block;
+    font-size: .7em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: fontColor;
 }
 
-.pullRight {
+.inline {
+    display: block;
+    overflow: hidden;
+}
+
+.inline div {
     float: right;
 }
 
-.listDescription {
-    composes: smallTitle;
-    float: right;
+.inlineFaded {
+    composes: inline;
+    color: fontColor;
+    font-size: .9em;
+}
+
+.inlineFaded div {
+    font-size: .7em;
     line-height: 2.2;
-}
-
-.verticalLine {
-    border-left: 1px solid #f4f4f4;
-    min-height: 520px;
-    padding-left: 9px;
+    font-weight: bold;
 }

@@ -29,30 +29,16 @@ function Payslip() {
                 <div className={ styles.bordered }>
                     <div className={ styles.half }>
                         <div className={ styles.content }>
-                            <div
-                                style={{
-                                    textTransform: 'uppercase'
-                                }}
-                                className={ styles.smallTitle }
-                            >
-                                Pay Run
-                            </div>
-                            <div className={ styles.contentTitle }>
+                            <div className={ styles.description }>
+                                <div>Pay Run</div>
                                 Sept 30, 2016
                             </div>
                         </div>
                     </div>
                     <div className={ styles.half }>
                         <div className={ styles.content }>
-                            <div
-                                style={{
-                                    textTransform: 'uppercase'
-                                }}
-                                className={ styles.smallTitle }
-                            >
-                                Pay Period
-                            </div>
-                            <div className={ styles.contentTitle }>
+                            <div className={ styles.description }>
+                                <div>Pay Period</div>
                                 Sept 16 - Sept 30, 2016
                             </div>
                         </div>
@@ -66,132 +52,78 @@ function Payslip() {
                     }}>
                         <div className={ styles.bordered }>
                                 <div className={ styles.content }>
-                                    <div className={ styles.contentTitle }>
+                                    <div>
                                         Juan Dela Cruz
                                     </div>
-                                    <ul className={ styles.listUnstyled }>
-                                        <li>
-                                            <span className={ styles.contentTitle }>Employee ID</span>
-                                            <span className={ styles.listDescription }>Emp-003</span>
-                                        </li>
-                                        <li>
-                                            <span className={ styles.contentTitle }>Date Hired</span>
-                                            <span className={ styles.listDescription }>June 20, 2014</span>
-                                        </li>
-                                    </ul>
+                                    <div className={ styles.inlineFaded }>
+                                        Employee ID
+                                        <div>Emp-003</div>
+                                    </div>
+                                    <div className={ styles.inlineFaded }>
+                                        Date Hired
+                                        <div>June 20, 2014</div>
+                                    </div>
                                 </div>
                             </div>
                             <div className={ styles.bordered }>
                                 <div className={ styles.content }>
-                                    <div className={ styles.contentTitle }>
+                                    <div>
                                         Employer Contribution
                                     </div>
-                                    <ul className={ styles.listUnstyled }>
-                                        <li>
-                                            <span className={ styles.contentTitle }>
-                                                SSS
-                                            </span>
-                                            <span className={ styles.listDescription }>
-                                                92.10
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span className={ styles.contentTitle }>
-                                                HDMF
-                                            </span>
-                                            <span className={ styles.listDescription }>
-                                                50.00
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span className={ styles.contentTitle }>
-                                                PhilHealth
-                                            </span>
-                                            <span className={ styles.listDescription }>
-                                                50.00
-                                            </span>
-                                        </li>
-                                    </ul>
+                                    <div className={ styles.inlineFaded }>
+                                        SSS
+                                        <div>92.10</div>
+                                    </div>
+                                    <div className={ styles.inlineFaded }>
+                                        HDMF
+                                        <div>50.00</div>
+                                    </div>
+                                    <div className={ styles.inlineFaded }>
+                                        PhilHealth
+                                        <div>50.00</div>
+                                    </div>
                                 </div>
                             </div>
                             <div className={ styles.content }>
-                                <div className={ styles.contentTitle }>
+                                <div>
                                     Year To Date Figures
                                 </div>
-                                <ul className={ styles.listUnstyled }>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Gross Incone
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            92.10
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Taxable Incone
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Withholding Tax
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Net Pay
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            SSS Employer
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            SSS EC Employer
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Gross Income
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            PhilHealth Employer
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            HDMF Employer
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            50.00
-                                        </span>
-                                    </li>
-                                </ul>
+                                <div className={ styles.inlineFaded }>
+                                    Gross Income
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    Taxable Income
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    Withholding Tax
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    Net Pay
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    SSS Employer
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    SSS EC Employer
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    Gross Income
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    PhilHealth Employer
+                                    <div>92.10</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    HDMF Employer
+                                    <div>92.10</div>
+                                </div>
                             </div>
                     </div>
 
@@ -200,107 +132,67 @@ function Payslip() {
                     <div className={ styles.verticalLine } >
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
-                                <div className={ styles.contentTitle }>
+                                <div>
                                     Salary
                                 </div>
-                                <ul className={ styles.listUnstyled }>
-                                    <li>
-                                        <span className={ styles.contentTitle }>Regular (30,000/Month)</span>
-                                        <span className={ styles.listDescription }>15,000.00</span>
-                                    </li>
-                                </ul>
+                                <div className={ styles.inlineFaded }>
+                                    Regular (30,000/Month)
+                                    <div>15,000.00</div>
+                                </div>
                             </div>
                         </div>
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
-                                <ul className={ styles.listUnstyled }>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Gross Income
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            15,000.00
-                                        </span>
-                                    </li>
-                                </ul>
+                                <div className={ styles.inline }>
+                                    Gross Income
+                                    <div>15,000.00</div>
+                                </div>
                             </div>
                         </div>
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
-                                <div className={ styles.contentTitle }>
+                                <div>
                                     Mandatory Deduction
                                 </div>
-                            <ul className={ styles.listUnstyled }>
-                                <li>
-                                    <span className={ styles.contentTitle }>
-                                        SSS
-                                    </span>
-                                    <span className={ styles.listDescription }>
-                                        (50.00)
-                                    </span>
-                                </li>
-                                <li>
-                                    <span className={ styles.contentTitle }>
-                                        HDMF
-                                    </span>
-                                    <span className={ styles.listDescription }>
-                                        (50.00)
-                                    </span>
-                                </li>
-                                <li>
-                                    <span className={ styles.contentTitle }>
-                                        PhilHealth
-                                    </span>
-                                    <span className={ styles.listDescription }>
-                                        (50.00)
-                                    </span>
-                                </li>
-                            </ul>
+                                <div className={ styles.inlineFaded }>
+                                    SSS
+                                    <div>(50.00)</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    HDMF
+                                    <div>(50.00)</div>
+                                </div>
+                                <div className={ styles.inlineFaded }>
+                                    PhilHealth
+                                    <div>(50.00)</div>
+                                </div>
                             </div>
                         </div>
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
-                                <ul className={ styles.listUnstyled }>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Taxable Income
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            15,000.00
-                                        </span>
-                                    </li>
-                                </ul>
+                                <div className={ styles.inline }>
+                                    Taxable Income
+                                    <div>15,000.00</div>
+                                </div>
                             </div>
                         </div>
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
-                                <div className={ styles.contentTitle }>
+                                <div>
                                     Tax
                                 </div>
-                                <ul className={ styles.listUnstyled }>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Taxable Income
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            14,850.00
-                                        </span>
-                                    </li>
-                                </ul>
+                                <div className={ styles.inlineFaded }>
+                                    Taxable Income
+                                    <div>14,850.00</div>
+                                </div>
                             </div>
                         </div>
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
-                                <ul className={ styles.listUnstyled }>
-                                    <li>
-                                        <span className={ styles.contentTitle }>
-                                            Net Pay
-                                        </span>
-                                        <span className={ styles.listDescription }>
-                                            12,061.00
-                                        </span>
-                                    </li>
-                                </ul>
+                                <div className={ styles.inline }>
+                                    Net Pay
+                                    <div>12,061.00</div>
+                                </div>
                             </div>
                         </div>
                     </div>

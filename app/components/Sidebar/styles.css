@@ -4,6 +4,9 @@
 
 .sidebar {
     background-color: sidebarBgColor;
+    height: calc(100vh - 183px);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .sidebarRight {

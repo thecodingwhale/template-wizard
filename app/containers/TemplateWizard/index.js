@@ -24,7 +24,7 @@ class TemplateWizard extends React.Component {
     constructor( props ) {
         super( props );
         this.state = {
-            isTemplateWizardOpen: true,
+            isTemplateWizardOpen: false,
             isLayoutOptionsOpen: false,
             layouts: [],
             templates: []
@@ -95,6 +95,44 @@ class TemplateWizard extends React.Component {
                         <Button>Address</Button>
                         <Button>Zip</Button>
                     </ButtonGroup>
+                    <TitleHeader
+                        bold
+                        type="h4"
+                    >
+                        Employment Details
+                    </TitleHeader>
+                    <ButtonGroup>
+                        <Button>Rank</Button>
+                        <Button>Employment Type</Button>
+                        <Button>Department</Button>
+                        <Button type="primary">Date Hired</Button>
+                    </ButtonGroup>
+                    <TitleHeader
+                        bold
+                        type="h4"
+                    >
+                        Salary Details
+                    </TitleHeader>
+                    <ButtonGroup>
+                        <Button>Tax Statuc</Button>
+                        <Button>Hourly Rate</Button>
+                        <Button>Payroll Group</Button>
+                        <Button>Payroll Cycle</Button>
+                        <Button>Cost Center</Button>
+                        <Button>Prepared By</Button>
+                    </ButtonGroup>
+                    <TitleHeader
+                        bold
+                        type="h4"
+                    >
+                        Mandatory Deduction
+                    </TitleHeader>
+                    <ButtonGroup>
+                        <Button type="primary">SSS</Button>
+                        <Button type="primary">TIN</Button>
+                        <Button type="primary">HDMF</Button>
+                        <Button type="primary">PhilHealth</Button>
+                    </ButtonGroup>
                 </div>
             </Sidebar>
         );
@@ -108,15 +146,17 @@ class TemplateWizard extends React.Component {
                 title="Templates"
                 position="right"
             >
-                <div
-                    style={{
-                        border: '1px solid #00A5E5',
-                        boxShadow: '0px 10px 22px 0px rgba(0,0,0,0.12)'
-                    }}
-                    className={ styles.boxRightSidebar }
-                />
-                <div className={ styles.boxRightSidebar } />
-                <div className={ styles.boxRightSidebar } />
+                <div>
+                    <div
+                        style={{
+                            border: '1px solid #00A5E5',
+                            boxShadow: '0px 10px 22px 0px rgba(0,0,0,0.12)'
+                        }}
+                        className={ styles.boxRightSidebar }
+                    />
+                    <div className={ styles.boxRightSidebar } />
+                    <div className={ styles.boxRightSidebar } />
+                </div>
             </Sidebar>
         );
     }
