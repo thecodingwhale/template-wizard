@@ -12,6 +12,7 @@ import ButtonGroup from '../../components/ButtonGroup'; // eslint-disable-line n
 import Button from '../../components/Button'; // eslint-disable-line no-multi-spaces
 import Sidebar from  '../../components/Sidebar'; // eslint-disable-line no-multi-spaces
 import TitleHeader from  '../../components/TitleHeader'; // eslint-disable-line no-multi-spaces
+import Payslip from  '../../components/Payslip'; // eslint-disable-line no-multi-spaces
 
 /**
  * TemplateWizard
@@ -23,7 +24,7 @@ class TemplateWizard extends React.Component {
     constructor( props ) {
         super( props );
         this.state = {
-            isTemplateWizardOpen: false,
+            isTemplateWizardOpen: true,
             isLayoutOptionsOpen: false,
             layouts: [],
             templates: []
@@ -75,24 +76,26 @@ class TemplateWizard extends React.Component {
     renderLeftSidebar() {
         return (
             <Sidebar>
-                <TitleHeader
-                    bold
-                    type="h4"
-                >
-                    Employee Details
-                </TitleHeader>
-                <ButtonGroup>
-                    <Button type="primary">Employee Name</Button>
-                    <Button type="primary">Employee ID</Button>
-                    <Button type="primary">Gender</Button>
-                    <Button type="primary">Photo</Button>
-                    <Button>Birth Date</Button>
-                    <Button>Mobile</Button>
-                    <Button>Telephone</Button>
-                    <Button>Email</Button>
-                    <Button>Address</Button>
-                    <Button>Zip</Button>
-                </ButtonGroup>
+                <div>
+                    <TitleHeader
+                        bold
+                        type="h4"
+                    >
+                        Employee Details
+                    </TitleHeader>
+                    <ButtonGroup>
+                        <Button type="primary">Employee Name</Button>
+                        <Button type="primary">Employee ID</Button>
+                        <Button type="primary">Gender</Button>
+                        <Button type="primary">Photo</Button>
+                        <Button>Birth Date</Button>
+                        <Button>Mobile</Button>
+                        <Button>Telephone</Button>
+                        <Button>Email</Button>
+                        <Button>Address</Button>
+                        <Button>Zip</Button>
+                    </ButtonGroup>
+                </div>
             </Sidebar>
         );
     }
@@ -105,7 +108,15 @@ class TemplateWizard extends React.Component {
                 title="Templates"
                 position="right"
             >
-
+                <div
+                    style={{
+                        border: '1px solid #00A5E5',
+                        boxShadow: '0px 10px 22px 0px rgba(0,0,0,0.12)'
+                    }}
+                    className={ styles.boxRightSidebar }
+                />
+                <div className={ styles.boxRightSidebar } />
+                <div className={ styles.boxRightSidebar } />
             </Sidebar>
         );
     }
@@ -135,7 +146,11 @@ class TemplateWizard extends React.Component {
                         { this.renderLeftSidebar() }
                     </div>
                     <div style={ mainStyle }>
-                        asdasdasd
+                        <div style={{
+                            paddingTop: '70px'
+                        }}>
+                            <Payslip />
+                        </div>
                     </div>
                     <div style={ paneStyle }>
                         { this.renderRightSidebar() }
