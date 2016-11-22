@@ -1,13 +1,18 @@
 import React from 'react';
 import styles from './styles.css';
 import TitleHeader from '../TitleHeader';
+import cx from 'classnames';
 
 /**
 * Payslip()
 */
-function Payslip() {
+function Payslip( props ) {
+    const className = cx( styles.base, {
+        [ styles.fullWidth ]: props.layout === 'full-width'
+    });
+
     return (
-        <div className={ styles.base }>
+        <div className={ className }>
             <div className={ styles.bordered }>
                 <div className={ styles.block }>
                     <div className={ styles.half }>
@@ -49,12 +54,8 @@ function Payslip() {
                 </div>
             </div>
             <div className={ styles.block }>
-                <div className={ styles.half }>
-                    <div
-                        style={ {
-                            paddingRight: '10px'
-                        } }
-                    >
+                <div className={ styles.section }>
+                    <div className={ styles.verticalPaddingRight }>
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
                                 <div>
@@ -132,7 +133,7 @@ function Payslip() {
                         </div>
                     </div>
                 </div>
-                <div className={ styles.half }>
+                <div className={ styles.section }>
                     <div className={ styles.verticalLine } >
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
@@ -203,7 +204,17 @@ function Payslip() {
                 </div>
             </div>
         </div>
-);
+    );
 }
+
+Payslip.propTypes = {
+    layout: React.PropTypes.oneOf([
+        'full-width', 'two-column'
+    ])
+};
+
+Payslip.defaultProps = {
+    layout: 'two-column'
+};
 
 export default Payslip;

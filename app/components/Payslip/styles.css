@@ -54,6 +54,10 @@
     padding-left: 9px;
 }
 
+.verticalPaddingRight {
+    padding-right: 10px;
+}
+
 .content {
     padding-top: 12px;
     padding-left: 5px;
@@ -87,4 +91,22 @@
     font-size: .7em;
     line-height: 2.2;
     font-weight: bold;
+}
+
+.section {
+    composes: half;
+}
+
+.fullWidth .verticalPaddingRight {
+    padding-right: 0px;
+}
+
+.fullWidth .verticalLine {
+    border-left: none;
+    padding-left: 0px;
+}
+
+.fullWidth .section {
+    width: 100%;
+    float: none;
 }
