@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // import { FormattedMessage } from 'react-intl';
@@ -26,12 +27,15 @@ class TemplateWizard extends React.Component {
         this.state = {
             isTemplateWizardOpen: false,
             isLayoutOptionsOpen: false,
+            defaultLayout: 'two-column',
+            options: [],
             layouts: [],
             templates: []
         };
 
         this.selectTemplate = this.selectTemplate.bind( this );
         this.viewAvailableTemplateLayouts = this.viewAvailableTemplateLayouts.bind( this );
+        this.updateLayout = this.updateLayout.bind( this );
     }
     /**
     * componentDidMount()
@@ -43,9 +47,33 @@ class TemplateWizard extends React.Component {
     * componentWillReceiveProps()
     */
     componentWillReceiveProps( nextProps ) {
+        const { templates, layouts } = nextProps.templateWizard;
+        let defaultLayout = [],
+            options = [];
+
+        layouts.map((layout, index) => {
+            if (layout.selected) {
+                defaultLayout = layout.value
+                options = layout.options
+            }
+        })
+
         this.setState({
-            templates: nextProps.templateWizard.templates,
-            layouts: nextProps.templateWizard.layouts
+            defaultLayout,
+            templates,
+            options,
+            layouts
+        });
+
+        console.log(options)
+    }
+    /**
+    * updateLayout()
+    */
+    updateLayout( layout, options ) {
+        this.setState({
+            defaultLayout: layout,
+            options: options
         });
     }
     /**
@@ -94,65 +122,37 @@ class TemplateWizard extends React.Component {
     * renderLeftSidebar()
     */
     renderLeftSidebar() {
+        const { layouts, options } = this.state;
+
         return (
             <Sidebar>
                 <div>
-                    <TitleHeader
-                        bold
-                        type="h4"
-                    >
-                        Employee Details
-                    </TitleHeader>
-                    <ButtonGroup>
-                        <Button type="primary">Employee Name</Button>
-                        <Button type="primary">Employee ID</Button>
-                        <Button type="primary">Gender</Button>
-                        <Button type="primary">Photo</Button>
-                        <Button>Birth Date</Button>
-                        <Button>Mobile</Button>
-                        <Button>Telephone</Button>
-                        <Button>Email</Button>
-                        <Button>Address</Button>
-                        <Button>Zip</Button>
-                    </ButtonGroup>
-                    <TitleHeader
-                        bold
-                        type="h4"
-                    >
-                        Employment Details
-                    </TitleHeader>
-                    <ButtonGroup>
-                        <Button>Rank</Button>
-                        <Button>Employment Type</Button>
-                        <Button>Department</Button>
-                        <Button type="primary">Date Hired</Button>
-                    </ButtonGroup>
-                    <TitleHeader
-                        bold
-                        type="h4"
-                    >
-                        Salary Details
-                    </TitleHeader>
-                    <ButtonGroup>
-                        <Button>Tax Statuc</Button>
-                        <Button>Hourly Rate</Button>
-                        <Button>Payroll Group</Button>
-                        <Button>Payroll Cycle</Button>
-                        <Button>Cost Center</Button>
-                        <Button>Prepared By</Button>
-                    </ButtonGroup>
-                    <TitleHeader
-                        bold
-                        type="h4"
-                    >
-                        Mandatory Deduction
-                    </TitleHeader>
-                    <ButtonGroup>
-                        <Button type="primary">SSS</Button>
-                        <Button type="primary">TIN</Button>
-                        <Button type="primary">HDMF</Button>
-                        <Button type="primary">PhilHealth</Button>
-                    </ButtonGroup>
+                    {options.map((option, index) => {
+                        let settings = option.settings;
+                        return (
+                            <div key={ index }>
+                                <TitleHeader
+                                    bold
+                                    type="h4"
+                                >
+                                    { option.name }
+                                </TitleHeader>
+                                <ButtonGroup>
+                                    {settings.map((setting, index) => {
+                                        let type = '';
+                                        if (setting.selected) {
+                                            type = "primary"
+                                        }
+                                        return (
+                                            <Button key={ index } type={ type }>
+                                                { setting.name }
+                                            </Button>
+                                        )
+                                    })}
+                                </ButtonGroup>
+                            </div>
+                        )
+                    })}
                 </div>
             </Sidebar>
         );
@@ -161,21 +161,20 @@ class TemplateWizard extends React.Component {
     * renderRightSidebar()
     */
     renderRightSidebar() {
+        const { layouts } = this.state;
         return (
             <Sidebar
                 title="Templates"
                 position="right"
             >
                 <div>
-                    <div
-                        style={ {
-                            border: '1px solid #00A5E5',
-                            boxShadow: '0px 10px 22px 0px rgba(0,0,0,0.12)'
-                        } }
-                        className={ styles.boxRightSidebar }
-                    />
-                    <div className={ styles.boxRightSidebar } />
-                    <div className={ styles.boxRightSidebar } />
+                    {layouts.map( ( layout, index ) => (
+                        <a key={ index } href="#" onClick={() => { this.updateLayout(layout.value, layout.options) }}>
+                            <div className={ cx( styles.boxRightSidebar, {
+                                [ styles.boxRightSidebarSelected ]: layout.selected
+                            }) } />
+                        </a>
+                    ) )}
                 </div>
             </Sidebar>
         );
@@ -208,10 +207,14 @@ class TemplateWizard extends React.Component {
                     <div style={ mainStyle }>
                         <div
                             style={ {
-                                paddingTop: '70px'
+                                paddingTop: '50px',
+                                paddingBottom: '50px',
+                                height: 'calc(100vh - 183px)',
+                                overflowY: 'scroll',
+                                overflowX: 'hidden'
                             } }
                         >
-                            <Payslip />
+                            <Payslip layout={ this.state.defaultLayout } />
                         </div>
                     </div>
                     <div style={ paneStyle }>

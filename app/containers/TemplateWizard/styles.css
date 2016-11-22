@@ -36,3 +36,8 @@
         box-shadow: 0px 10px 22px 0px rgba(0,0,0,0.12);
     }
 }
+
+.boxRightSidebarSelected {
+    border: 1px solid #00A5E5;
+    box-shadow: 0px 10px 22px 0px rgba(0,0,0,0.12);
+}
