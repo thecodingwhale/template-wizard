@@ -3,7 +3,7 @@ import {
 } from './constants';
 
 /**
- * TemplateWizard actions
+ * defaultAction()
  */
 export function defaultAction() {
     return {
@@ -11,12 +11,18 @@ export function defaultAction() {
     };
 }
 
+/**
+ * loadTemplates()
+ */
 export function loadTemplates() {
     return {
         type: 'LOAD_TEMPLATES'
     };
 }
 
+/**
+ * loadLayouts()
+ */
 export function loadLayouts() {
     return {
         type: 'LOAD_LAYOUTS'

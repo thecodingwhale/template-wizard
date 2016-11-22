@@ -6,7 +6,7 @@ import selectTemplateWizard from './selectors';
 import * as TemplateWizardActions from './actions';
 // import messages from './messages';
 import styles from './styles.css';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import TopBar from '../../components/TopBar'; // eslint-disable-line no-multi-spaces
 import ButtonGroup from '../../components/ButtonGroup'; // eslint-disable-line no-multi-spaces
 import Button from '../../components/Button'; // eslint-disable-line no-multi-spaces
@@ -29,6 +29,15 @@ class TemplateWizard extends React.Component {
             layouts: [],
             templates: []
         };
+
+        this.selectTemplate = this.selectTemplate.bind( this );
+        this.viewAvailableTemplateLayouts = this.viewAvailableTemplateLayouts.bind( this );
+    }
+    /**
+    * componentDidMount()
+    */
+    componentDidMount() {
+        this.props.loadTemplates();
     }
     /**
     * componentWillReceiveProps()
@@ -40,10 +49,22 @@ class TemplateWizard extends React.Component {
         });
     }
     /**
-    * componentDidMount()
+    * selectTemplate()
     */
-    componentDidMount() {
-        this.props.loadTemplates();
+    selectTemplate( e ) {
+        e.preventDefault();
+        this.setState({
+            isTemplateWizardOpen: true
+        });
+    }
+    /**
+    * viewAvailableTemplateLayouts()
+    */
+    viewAvailableTemplateLayouts() {
+        this.setState({
+            isLayoutOptionsOpen: true
+        });
+        this.props.loadLayouts();
     }
     /**
     * renderTopBar()
@@ -55,15 +76,14 @@ class TemplateWizard extends React.Component {
             <div>
                 <TopBar title="Template Wizard">
                     {isTemplateWizardOpen
-                        ? (
-                            <div>
-                                <Button type="primary" size="large" outline>
-                                    PDF PREVIEW
-                                </Button>
-                                <Button type="primary" size="large">
-                                    SAVE
-                                </Button>
-                            </div>
+                        ? ( <div>
+                            <Button type="primary" size="large" outline>
+                                PDF PREVIEW
+                            </Button>
+                            <Button type="primary" size="large">
+                                SAVE
+                            </Button>
+                        </div>
                         )
                         : null}
                 </TopBar>
@@ -148,10 +168,10 @@ class TemplateWizard extends React.Component {
             >
                 <div>
                     <div
-                        style={{
+                        style={ {
                             border: '1px solid #00A5E5',
                             boxShadow: '0px 10px 22px 0px rgba(0,0,0,0.12)'
-                        }}
+                        } }
                         className={ styles.boxRightSidebar }
                     />
                     <div className={ styles.boxRightSidebar } />
@@ -169,15 +189,15 @@ class TemplateWizard extends React.Component {
             display: 'block',
             minHeight: '30px',
             boxSizing: 'border-box',
-            float: 'left',
+            float: 'left'
         };
         const mainStyle = {
             width: '60%',
             display: 'block',
             minHeight: '30px',
             boxSizing: 'border-box',
-            float: 'left',
-        }
+            float: 'left'
+        };
         return (
             <div>
                 { this.renderTopBar() }
@@ -186,9 +206,11 @@ class TemplateWizard extends React.Component {
                         { this.renderLeftSidebar() }
                     </div>
                     <div style={ mainStyle }>
-                        <div style={{
-                            paddingTop: '70px'
-                        }}>
+                        <div
+                            style={ {
+                                paddingTop: '70px'
+                            } }
+                        >
                             <Payslip />
                         </div>
                     </div>
@@ -200,29 +222,11 @@ class TemplateWizard extends React.Component {
         );
     }
     /**
-    * viewAvailableTemplateLayouts()
-    */
-    viewAvailableTemplateLayouts() {
-        this.setState({
-            isLayoutOptionsOpen: true
-        });
-        this.props.loadLayouts();
-    }
-    /**
-    * selectTemplate()
-    */
-    selectTemplate(layout, e) {
-        e.preventDefault();
-        this.setState({
-            isTemplateWizardOpen: true
-        });
-    }
-    /**
     * renderCreateTemplate()
     */
     renderCreateTemplate() {
         const { isLayoutOptionsOpen, layouts } = this.state;
-        if (isLayoutOptionsOpen) {
+        if ( isLayoutOptionsOpen ) {
             return (
                 <div>
                     { this.renderTopBar() }
@@ -231,34 +235,31 @@ class TemplateWizard extends React.Component {
                             Templates
                         </TitleHeader>
                         <div>
-                            {layouts.map((layout, index) => (
-                                <div
-                                    key={index}
+                            {layouts.map( ( layout, index ) => (
+                                <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+                                    key={ index }
                                     className={ styles.boxTemplate }
-                                    onClick={this.selectTemplate.bind(this, layout)}
+                                    onClick={ this.selectTemplate }
                                 />
-                            ))}
+                            ) )}
                         </div>
                     </div>
                 </div>
-            )
+            );
         }
-        else {
-            return (
-                <div>
-                    <p>
-                        Hooray! You can create your payslip here!
-                    </p>
-                    <Button
-                        type="primary"
-                        onClick={::this.viewAvailableTemplateLayouts}
-                    >
-                        Create
-                    </Button>
-                </div>
-            )
-        }
-
+        return (
+            <div>
+                <p>
+                    Hooray! You can create your payslip here!
+                </p>
+                <Button
+                    type="primary"
+                    onClick={ this.viewAvailableTemplateLayouts }
+                >
+                    Create
+                </Button>
+            </div>
+        );
     }
     /**
     * render()
@@ -282,13 +283,20 @@ class TemplateWizard extends React.Component {
     }
 }
 
+TemplateWizard.propTypes = {
+    loadTemplates: React.PropTypes.func,
+    loadLayouts: React.PropTypes.func
+};
+
 const mapStateToProps = selectTemplateWizard();
 
 /**
 * mapDispatchToProps()
 */
 function mapDispatchToProps( dispatch ) {
-    return bindActionCreators(TemplateWizardActions, dispatch);
+    return bindActionCreators(
+        TemplateWizardActions, dispatch
+    );
 }
 
 export default connect(

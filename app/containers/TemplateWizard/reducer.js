@@ -18,9 +18,21 @@ function templateWizardReducer( state = initialState, action ) {
         case DEFAULT_ACTION:
             return state;
         case 'LAYOUTS_LOADED':
-            return state.setIn(['templateWizard', 'layouts'], action.request.layouts);
+            return state.setIn(
+                [
+                    'templateWizard',
+                    'layouts'
+                ],
+                action.request.layouts
+            );
         case 'TEMPLATES_LOADED':
-            return state.setIn(['templateWizard', 'templates'], action.request.templates);
+            return state.setIn(
+                [
+                    'templateWizard',
+                    'templates'
+                ],
+                action.request.templates
+            );
         default:
             return state;
     }
