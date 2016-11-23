@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { fromJS } from 'immutable';
 // import { FormattedMessage } from 'react-intl';
 import selectTemplateWizard from './selectors';
 import * as TemplateWizardActions from './actions';
@@ -36,6 +37,7 @@ class TemplateWizard extends React.Component {
         this.selectTemplate = this.selectTemplate.bind( this );
         this.viewAvailableTemplateLayouts = this.viewAvailableTemplateLayouts.bind( this );
         this.updateLayout = this.updateLayout.bind( this );
+        this.updateOptionSetting = this.updateOptionSetting.bind( this );
     }
     /**
     * componentDidMount()
@@ -64,8 +66,6 @@ class TemplateWizard extends React.Component {
             options,
             layouts
         });
-
-        console.log(options)
     }
     /**
     * updateLayout()
@@ -83,6 +83,15 @@ class TemplateWizard extends React.Component {
         e.preventDefault();
         this.setState({
             isTemplateWizardOpen: true
+        });
+    }
+    /**
+    * selectOption()
+    */
+    updateOptionSetting( options, optionId, settingId ) {
+        options[optionId - 1].settings[settingId - 1].selected = !options[optionId - 1].settings[settingId - 1].selected;
+        this.setState({
+            options: options
         });
     }
     /**
@@ -144,7 +153,7 @@ class TemplateWizard extends React.Component {
                                             type = "primary"
                                         }
                                         return (
-                                            <Button key={ index } type={ type }>
+                                            <Button size="small" key={ index } type={ type } onClick={() => { this.updateOptionSetting(options, option.id, setting.id) }}>
                                                 { setting.name }
                                             </Button>
                                         )
