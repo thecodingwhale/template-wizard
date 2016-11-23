@@ -56,21 +56,38 @@ function Payslip( props ) {
             <div className={ styles.block }>
                 <div className={ styles.section }>
                     <div className={ styles.verticalPaddingRight }>
-                        <div className={ styles.bordered }>
-                            <div className={ styles.content }>
-                                <div>
-                                    Juan Dela Cruz
+                        {props.options.map((option, optionIndex) => {
+                            let settings = option.settings;
+                            return (
+                                <div key={ optionIndex } className={ styles.bordered }>
+                                    <div className={ styles.content }>
+                                        <div>
+                                            { option.name }
+                                        </div>
+                                        {settings.map((setting, settingIndex) => {
+                                            if (setting.name == 'Photo') {
+                                                return;
+                                            }
+                                            let styleHide = {};
+                                            if (!setting.selected) {
+                                                styleHide = {
+                                                    display: 'none'
+                                                };
+                                            }
+                                            return (
+                                                <div
+                                                    style={ styleHide }
+                                                    key={ settingIndex }
+                                                    className={ styles.inlineFaded }>
+                                                    { setting.name }
+                                                    <div>{ setting.value }</div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                                <div className={ styles.inlineFaded }>
-                                    Employee ID
-                                    <div>Emp-003</div>
-                                </div>
-                                <div className={ styles.inlineFaded }>
-                                    Date Hired
-                                    <div>June 20, 2014</div>
-                                </div>
-                            </div>
-                        </div>
+                            )
+                        })}
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
                                 <div>

@@ -223,7 +223,10 @@ class TemplateWizard extends React.Component {
                                 overflowX: 'hidden'
                             } }
                         >
-                            <Payslip layout={ this.state.defaultLayout } />
+                            <Payslip
+                                layout={ this.state.defaultLayout }
+                                options={ this.state.options }
+                            />
                         </div>
                     </div>
                     <div style={ paneStyle }>
