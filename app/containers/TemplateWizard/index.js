@@ -27,7 +27,7 @@ class TemplateWizard extends React.Component {
         this.state = {
             isTemplateWizardOpen: false,
             isLayoutOptionsOpen: false,
-            defaultLayout: 'two-column',
+            defaultLayout: '',
             options: [],
             layouts: [],
             templates: []
@@ -161,7 +161,7 @@ class TemplateWizard extends React.Component {
     * renderRightSidebar()
     */
     renderRightSidebar() {
-        const { layouts } = this.state;
+        const { layouts, defaultLayout } = this.state;
         return (
             <Sidebar
                 title="Templates"
@@ -171,7 +171,7 @@ class TemplateWizard extends React.Component {
                     {layouts.map( ( layout, index ) => (
                         <a key={ index } href="#" onClick={() => { this.updateLayout(layout.value, layout.options) }}>
                             <div className={ cx( styles.boxRightSidebar, {
-                                [ styles.boxRightSidebarSelected ]: layout.selected
+                                [ styles.boxRightSidebarSelected ]: layout.value === defaultLayout
                             }) } />
                         </a>
                     ) )}
