@@ -53,11 +53,18 @@ function Payslip( props ) {
                     </div>
                 </div>
             </div>
-            <div className={ styles.block }>
+            <div style={{ position: 'relative' }} className={ styles.block }>
+                <div className={ styles.verticalLine }></div>
                 <div className={ styles.section }>
                     <div className={ styles.verticalPaddingRight }>
                         {props.options.map((option, optionIndex) => {
                             let settings = option.settings;
+                            let notingSelected = settings.every(setting => {
+                                return !setting.selected;
+                            });
+                            if (notingSelected) {
+                                return;
+                            }
                             return (
                                 <div key={ optionIndex } className={ styles.bordered }>
                                     <div className={ styles.content }>
@@ -88,70 +95,10 @@ function Payslip( props ) {
                                 </div>
                             )
                         })}
-                        <div className={ styles.bordered }>
-                            <div className={ styles.content }>
-                                <div>
-                                    Employer Contribution
-                                </div>
-                                <div className={ styles.inlineFaded }>
-                                    SSS
-                                    <div>92.10</div>
-                                </div>
-                                <div className={ styles.inlineFaded }>
-                                    HDMF
-                                    <div>50.00</div>
-                                </div>
-                                <div className={ styles.inlineFaded }>
-                                    PhilHealth
-                                    <div>50.00</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={ styles.content }>
-                            <div>
-                                Year To Date Figures
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                Gross Income
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                Taxable Income
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                Withholding Tax
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                Net Pay
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                SSS Employer
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                SSS EC Employer
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                Gross Income
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                PhilHealth Employer
-                                <div>92.10</div>
-                            </div>
-                            <div className={ styles.inlineFaded }>
-                                HDMF Employer
-                                <div>92.10</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className={ styles.section }>
-                    <div className={ styles.verticalLine } >
+                    <div className={ styles.verticalPaddingLeft } >
                         <div className={ styles.bordered }>
                             <div className={ styles.content }>
                                 <div>

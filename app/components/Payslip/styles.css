@@ -20,6 +20,7 @@
 
 .block {
     display: block;
+    overflow: hidden;
 }
 
 .avatar {
@@ -49,9 +50,15 @@
 }
 
 .verticalLine {
+    position: absolute;
+    height: 100%;
     border-left: 1px solid borderColor;
-    min-height: 520px;
-    padding-left: 9px;
+    top: 10px;
+    left: 50%;
+}
+
+.verticalPaddingLeft {
+    padding-left: 10px;
 }
 
 .verticalPaddingRight {
@@ -101,12 +108,15 @@
     padding-right: 0px;
 }
 
-.fullWidth .verticalLine {
-    border-left: none;
+.fullWidth .verticalPaddingLeft {
     padding-left: 0px;
 }
 
 .fullWidth .section {
     width: 100%;
     float: none;
+}
+
+.fullWidth .verticalLine {
+    display: none;
 }
