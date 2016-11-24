@@ -27,15 +27,13 @@ class TemplateWizard extends React.Component {
         super( props );
         this.state = {
             isTemplateWizardOpen: false,
-            isLayoutOptionsOpen: false,
+            isThereAnyCustomTemplates: false,
             defaultLayout: '',
             options: [],
-            layouts: [],
             templates: []
         };
 
         this.selectTemplate = this.selectTemplate.bind( this );
-        this.viewAvailableTemplateLayouts = this.viewAvailableTemplateLayouts.bind( this );
         this.updateLayout = this.updateLayout.bind( this );
         this.updateOptionSetting = this.updateOptionSetting.bind( this );
     }
@@ -44,27 +42,33 @@ class TemplateWizard extends React.Component {
     */
     componentDidMount() {
         this.props.loadTemplates();
+        // this.props.loadLayouts();
     }
     /**
     * componentWillReceiveProps()
     */
     componentWillReceiveProps( nextProps ) {
-        const { templates, layouts } = nextProps.templateWizard;
-        let defaultLayout = [],
+
+        const { templates } = nextProps.templateWizard;
+        let isThereAnyCustomTemplates = false,
+            defaultLayout = [],
             options = [];
 
-        layouts.map((layout, index) => {
-            if (layout.selected) {
-                defaultLayout = layout.value
-                options = layout.options
+        templates.map((template, index) => {
+            if (template.type == 'custom') {
+                isThereAnyCustomTemplates = true;
             }
-        })
+            if (template.selected) {
+                defaultLayout = template.value
+                options = template.options
+            }
+        });
 
         this.setState({
             defaultLayout,
+            isThereAnyCustomTemplates,
             templates,
-            options,
-            layouts
+            options
         });
     }
     /**
@@ -95,20 +99,11 @@ class TemplateWizard extends React.Component {
         });
     }
     /**
-    * viewAvailableTemplateLayouts()
-    */
-    viewAvailableTemplateLayouts() {
-        this.setState({
-            isLayoutOptionsOpen: true
-        });
-        this.props.loadLayouts();
-    }
-    /**
     * renderTopBar()
     */
     renderTopBar() {
         // let title = <FormattedMessage { ...messages.header } />;
-        const { isTemplateWizardOpen } = this.state;
+        const { isTemplateWizardOpen, isThereAnyCustomTemplates } = this.state;
         return (
             <div>
                 <TopBar title="Template Wizard">
@@ -123,6 +118,15 @@ class TemplateWizard extends React.Component {
                         </div>
                         )
                         : null}
+                    {isThereAnyCustomTemplates
+                        ? (
+                            <div>
+                                <Button type="primary" size="large">
+                                    CREATE NEW TEMPLATE
+                                </Button>
+                            </div>
+                        )
+                        : null}
                 </TopBar>
             </div>
         );
@@ -131,7 +135,7 @@ class TemplateWizard extends React.Component {
     * renderLeftSidebar()
     */
     renderLeftSidebar() {
-        const { layouts, options } = this.state;
+        const { templates, options } = this.state;
 
         return (
             <Sidebar>
@@ -170,17 +174,17 @@ class TemplateWizard extends React.Component {
     * renderRightSidebar()
     */
     renderRightSidebar() {
-        const { layouts, defaultLayout } = this.state;
+        const { templates, defaultLayout } = this.state;
         return (
             <Sidebar
                 title="Templates"
                 position="right"
             >
                 <div>
-                    {layouts.map( ( layout, index ) => (
-                        <a key={ index } href="#" onClick={() => { this.updateLayout(layout.value, layout.options) }}>
+                    {templates.map( ( template, index ) => (
+                        <a key={ index } href="#" onClick={() => { this.updateLayout(template.value, template.options) }}>
                             <div className={ cx( styles.boxRightSidebar, {
-                                [ styles.boxRightSidebarSelected ]: layout.value === defaultLayout
+                                [ styles.boxRightSidebarSelected ]: template.value === defaultLayout
                             }) } />
                         </a>
                     ) )}
@@ -240,28 +244,6 @@ class TemplateWizard extends React.Component {
     * renderCreateTemplate()
     */
     renderCreateTemplate() {
-        const { isLayoutOptionsOpen, layouts } = this.state;
-        if ( isLayoutOptionsOpen ) {
-            return (
-                <div>
-                    { this.renderTopBar() }
-                    <div>
-                        <TitleHeader type="h2">
-                            Templates
-                        </TitleHeader>
-                        <div>
-                            {layouts.map( ( layout, index ) => (
-                                <div // eslint-disable-line jsx-a11y/no-static-element-interactions
-                                    key={ index }
-                                    className={ styles.boxTemplate }
-                                    onClick={ this.selectTemplate }
-                                />
-                            ) )}
-                        </div>
-                    </div>
-                </div>
-            );
-        }
         return (
             <div>
                 <p>
@@ -269,10 +251,71 @@ class TemplateWizard extends React.Component {
                 </p>
                 <Button
                     type="primary"
-                    onClick={ this.viewAvailableTemplateLayouts }
+                    onClick={ this.selectTemplate }
                 >
                     Create
                 </Button>
+            </div>
+        );
+    }
+    viewTemplates() {
+        const { templates, defaultLayout } = this.state;
+        return (
+            <div>
+                { this.renderTopBar() }
+                <div
+                    style={{
+                        padding: '15px 20px'
+                    }}
+                >
+                    <TitleHeader type="h3">
+                        Your Payslip Templates
+                    </TitleHeader>
+                </div>
+                <div
+                    style={{
+                        maxWidth: '1200px',
+                        margin: '0 auto'
+                    }}
+                >
+                    {templates.map((template, index) => {
+                        return (
+                            <div
+                                style={{
+                                    width: '25%',
+                                    float: 'left'
+                                }}
+                                key={ index }
+                            >
+                                <a href="#" >
+                                    <div
+                                        style={{
+                                            position: 'relative'
+                                        }}
+                                        className={ styles.boxRightSidebar }
+                                    >
+                                        <div
+                                            style={{
+                                                width: '40px',
+                                                height: '40px',
+                                                backgroundColor: '#00A5E5',
+                                                position: 'absolute',
+                                                left: '50%',
+                                                marginLeft: '-20px',
+                                                top: '-20px',
+                                                zIndex: '1',
+                                                borderRadius: '50%',
+                                                boxShadow: '0px 3px 5px 0px rgba(0,0,0,0.12)'
+                                            }}
+                                        >
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         );
     }
@@ -280,7 +323,10 @@ class TemplateWizard extends React.Component {
     * render()
     */
     render() {
-        const { isTemplateWizardOpen } = this.state;
+        const { isTemplateWizardOpen,
+            isThereAnyCustomTemplates
+        } = this.state;
+
         return (
             <div className={ styles.templateWizard }>
                 <Helmet
@@ -292,7 +338,7 @@ class TemplateWizard extends React.Component {
                         }
                     ] }
                 />
-                {isTemplateWizardOpen ? this.renderTemplateEditor() : this.renderCreateTemplate()}
+                {isTemplateWizardOpen ? this.renderTemplateEditor() : isThereAnyCustomTemplates ? this.viewTemplates() : this.renderCreateTemplate()}
             </div>
         );
     }

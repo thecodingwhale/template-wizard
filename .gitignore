@@ -8,3 +8,4 @@ setup.js
 .DS_Store
 npm-debug.log
 .idea
+yarn.lock
