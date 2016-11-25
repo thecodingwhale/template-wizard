@@ -58,15 +58,23 @@ function Payslip( props ) {
                 <div className={ styles.section }>
                     <div className={ styles.verticalPaddingRight }>
                         {props.options.map((option, optionIndex) => {
+                            let removeLastBorder = {};
                             let settings = option.settings;
                             let notingSelected = settings.every(setting => {
                                 return !setting.selected;
                             });
+
+                            if (props.options.length == optionIndex + 1) {
+                                removeLastBorder = {
+                                    borderBottom: 'transparent'
+                                };
+                            }
+
                             if (notingSelected) {
                                 return;
                             }
                             return (
-                                <div key={ optionIndex } className={ styles.bordered }>
+                                <div style={ removeLastBorder } key={ optionIndex } className={ styles.bordered }>
                                     <div className={ styles.content }>
                                         <div>
                                             { option.name }

@@ -59,7 +59,7 @@ class TemplateWizard extends React.Component {
                 isThereAnyCustomTemplates = true;
             }
             if (template.selected) {
-                defaultLayout = template.value
+                defaultLayout = template.type
                 options = template.options
             }
         });
@@ -92,8 +92,8 @@ class TemplateWizard extends React.Component {
     /**
     * selectOption()
     */
-    updateOptionSetting( options, optionId, settingId ) {
-        options[optionId - 1].settings[settingId - 1].selected = !options[optionId - 1].settings[settingId - 1].selected;
+    updateOptionSetting( options, optionId, index ) {
+        options[optionId - 1].settings[index - 1].selected = !options[optionId - 1].settings[index - 1].selected;
         this.setState({
             options: options
         });
@@ -157,7 +157,7 @@ class TemplateWizard extends React.Component {
                                             type = "primary"
                                         }
                                         return (
-                                            <Button size="small" key={ index } type={ type } onClick={() => { this.updateOptionSetting(options, option.id, setting.id) }}>
+                                            <Button size="small" key={ index } type={ type } onClick={() => { this.updateOptionSetting(options, option.id, index + 1) }}>
                                                 { setting.name }
                                             </Button>
                                         )
@@ -182,9 +182,9 @@ class TemplateWizard extends React.Component {
             >
                 <div>
                     {templates.map( ( template, index ) => (
-                        <a key={ index } href="#" onClick={() => { this.updateLayout(template.value, template.options) }}>
+                        <a key={ index } href="#" onClick={() => { this.updateLayout(template.type, template.options) }}>
                             <div className={ cx( styles.boxRightSidebar, {
-                                [ styles.boxRightSidebarSelected ]: template.value === defaultLayout
+                                [ styles.boxRightSidebarSelected ]: template.type === defaultLayout
                             }) } />
                         </a>
                     ) )}
@@ -260,6 +260,18 @@ class TemplateWizard extends React.Component {
     }
     viewTemplates() {
         const { templates, defaultLayout } = this.state;
+        const selectedActiveTemplateStyle = {
+            width: '40px',
+            height: '40px',
+            backgroundColor: '#00A5E5',
+            position: 'absolute',
+            left: '50%',
+            marginLeft: '-20px',
+            top: '-20px',
+            zIndex: '1',
+            borderRadius: '50%',
+            boxShadow: '0px 3px 5px 0px rgba(0,0,0,0.12)'
+        };
         return (
             <div>
                 { this.renderTopBar() }
@@ -295,18 +307,7 @@ class TemplateWizard extends React.Component {
                                         className={ styles.boxRightSidebar }
                                     >
                                         <div
-                                            style={{
-                                                width: '40px',
-                                                height: '40px',
-                                                backgroundColor: '#00A5E5',
-                                                position: 'absolute',
-                                                left: '50%',
-                                                marginLeft: '-20px',
-                                                top: '-20px',
-                                                zIndex: '1',
-                                                borderRadius: '50%',
-                                                boxShadow: '0px 3px 5px 0px rgba(0,0,0,0.12)'
-                                            }}
+                                            style={template.selected ? selectedActiveTemplateStyle : {}}
                                         >
 
                                         </div>
