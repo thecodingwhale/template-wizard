@@ -42,7 +42,6 @@ class TemplateWizard extends React.Component {
     */
     componentDidMount() {
         this.props.loadTemplates();
-        // this.props.loadLayouts();
     }
     /**
     * componentWillReceiveProps()
@@ -51,16 +50,18 @@ class TemplateWizard extends React.Component {
 
         const { templates } = nextProps.templateWizard;
         let isThereAnyCustomTemplates = false,
+            activeIndex = '',
             defaultLayout = [],
             options = [];
 
         templates.map((template, index) => {
-            if (template.type == 'custom') {
+            if (template.category == 'custom') {
                 isThereAnyCustomTemplates = true;
             }
             if (template.selected) {
-                defaultLayout = template.type
-                options = template.options
+                defaultLayout = template.type;
+                options = template.options;
+                activeIndex = index;
             }
         });
 
@@ -68,16 +69,22 @@ class TemplateWizard extends React.Component {
             defaultLayout,
             isThereAnyCustomTemplates,
             templates,
-            options
+            options,
+            activeIndex
         });
     }
     /**
     * updateLayout()
     */
-    updateLayout( layout, options ) {
+    updateLayout( index, templates, layout, options ) {
+        templates[this.state.activeIndex].selected = false;
+        templates[index].selected = true;
+
         this.setState({
             defaultLayout: layout,
-            options: options
+            activeIndex: index,
+            options,
+            templates
         });
     }
     /**
@@ -174,7 +181,7 @@ class TemplateWizard extends React.Component {
     * renderRightSidebar()
     */
     renderRightSidebar() {
-        const { templates, defaultLayout } = this.state;
+        const { templates, defaultLayout, activeIndex } = this.state;
         return (
             <Sidebar
                 title="Templates"
@@ -182,9 +189,9 @@ class TemplateWizard extends React.Component {
             >
                 <div>
                     {templates.map( ( template, index ) => (
-                        <a key={ index } href="#" onClick={() => { this.updateLayout(template.type, template.options) }}>
+                        <a key={ index } href="#" onClick={() => { this.updateLayout(index, templates, template.type, template.options) }}>
                             <div className={ cx( styles.boxRightSidebar, {
-                                [ styles.boxRightSidebarSelected ]: template.type === defaultLayout
+                                [ styles.boxRightSidebarSelected ]: template.selected == true && index == activeIndex
                             }) } />
                         </a>
                     ) )}
@@ -298,6 +305,7 @@ class TemplateWizard extends React.Component {
                                     float: 'left'
                                 }}
                                 key={ index }
+                                onClick={() => { this.updateLayout(index, templates, template.type, template.options) }}
                             >
                                 <a href="#" >
                                     <div
