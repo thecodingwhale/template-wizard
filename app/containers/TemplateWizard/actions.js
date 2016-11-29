@@ -1,5 +1,7 @@
 import {
-    DEFAULT_ACTION
+    DEFAULT_ACTION,
+    LOAD_TEMPLATES,
+    SAVE_TEMPLATE
 } from './constants';
 
 /**
@@ -16,15 +18,16 @@ export function defaultAction() {
  */
 export function loadTemplates() {
     return {
-        type: 'LOAD_TEMPLATES'
+        type: LOAD_TEMPLATES
     };
 }
 
 /**
  * loadLayouts()
  */
-export function loadLayouts() {
+export function saveTemplate(template) {
     return {
-        type: 'LOAD_LAYOUTS'
-    };
+        payload: template,
+        type: SAVE_TEMPLATE
+    }
 }

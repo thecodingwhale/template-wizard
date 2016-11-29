@@ -1,12 +1,12 @@
 const API_DOMAIN = 'http://api.salarium-react.local';
-const API_FETCH_LAYOUTS = `${API_DOMAIN}/api/payslip-wizard/layouts`;
 const API_FETCH_TEMPLATES = `${API_DOMAIN}/api/payslip-wizard/templates`;
+const API_SAVE_TEMPLATE = `${API_DOMAIN}/api/payslip-wizard/save`;
 
 /**
-* fetchPayslipLayout()
+* fetchPayslipTemplate()
 */
-export function fetchPayslipLayout() {
-    return fetch( API_FETCH_LAYOUTS ).then( ( response ) => { // eslint-disable-line arrow-body-style
+export function fetchPayslipTemplate() {
+    return fetch( API_FETCH_TEMPLATES ).then( ( response ) => { // eslint-disable-line arrow-body-style
         return response.json().then( ( json ) => { // eslint-disable-line arrow-body-style
             return json.data;
         });
@@ -14,10 +14,15 @@ export function fetchPayslipLayout() {
 }
 
 /**
-* fetchPayslipTemplate()
+* postRequestSaveTemplate()
 */
-export function fetchPayslipTemplate() {
-    return fetch( API_FETCH_TEMPLATES ).then( ( response ) => { // eslint-disable-line arrow-body-style
+export function postRequestSaveTemplate( template ) {
+    let data = new FormData();
+    let body = {
+        method: 'POST',
+        body: JSON.stringify( template )
+    }
+    return fetch( API_SAVE_TEMPLATE, body ).then( ( response ) => { // eslint-disable-line arrow-body-style
         return response.json().then( ( json ) => { // eslint-disable-line arrow-body-style
             return json.data;
         });
