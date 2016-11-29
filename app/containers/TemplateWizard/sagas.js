@@ -1,29 +1,18 @@
+import { takeEvery } from 'redux-saga';
 import { take, put } from 'redux-saga/effects';
+
+import {
+    DEFAULT_ACTION,
+    LOAD_TEMPLATES,
+    TEMPLATES_LOADED,
+    SAVE_TEMPLATE,
+    NEW_TEMPLATE_ADDED,
+
+} from './constants';
 import {
     fetchPayslipTemplate,
-    fetchPayslipLayout
+    postRequestSaveTemplate
 } from './api';
-
-/**
-* loadLayouts()
-*/
-export function* loadLayouts() {
-    const request = yield fetchPayslipLayout();
-    yield put({
-        type: 'LAYOUTS_LOADED',
-        request
-    });
-}
-
-/**
-* watchForLoadLayouts()
-*/
-export function* watchForLoadLayouts() {
-    while ( true ) { // eslint-disable-line no-constant-condition
-        yield take( 'LOAD_LAYOUTS' );
-        yield loadLayouts();
-    }
-}
 
 /**
 * loadTemplates()
@@ -31,7 +20,7 @@ export function* watchForLoadLayouts() {
 export function* loadTemplates() {
     const request = yield fetchPayslipTemplate();
     yield put({
-        type: 'TEMPLATES_LOADED',
+        type: TEMPLATES_LOADED,
         request
     });
 }
@@ -41,12 +30,32 @@ export function* loadTemplates() {
 */
 export function* watchForLoadTemplates() {
     while ( true ) { // eslint-disable-line no-constant-condition
-        yield take( 'LOAD_TEMPLATES' );
+        yield take( LOAD_TEMPLATES );
         yield loadTemplates();
     }
 }
 
+/**
+* saveTemplate()
+*/
+export function* saveTemplate( template ) {
+    const request = yield postRequestSaveTemplate( template.payload );
+    yield put({
+        type: NEW_TEMPLATE_ADDED,
+        request: template.payload
+    });
+}
+
+/**
+* watchForSaveTemplate()
+*/
+export function* watchForSaveTemplate() {
+    while ( true ) { // eslint-disable-line no-constant-condition
+        yield takeEvery( SAVE_TEMPLATE, saveTemplate);
+    }
+}
+
 export default [
-    watchForLoadLayouts,
-    watchForLoadTemplates
+    watchForLoadTemplates,
+    watchForSaveTemplate
 ];
