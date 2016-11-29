@@ -36,6 +36,7 @@ class TemplateWizard extends React.Component {
         this.selectTemplate = this.selectTemplate.bind( this );
         this.updateLayout = this.updateLayout.bind( this );
         this.updateOptionSetting = this.updateOptionSetting.bind( this );
+        this.saveTemplate = this.saveTemplate.bind( this );
     }
     /**
     * componentDidMount()
@@ -47,8 +48,8 @@ class TemplateWizard extends React.Component {
     * componentWillReceiveProps()
     */
     componentWillReceiveProps( nextProps ) {
-
         const { templates } = nextProps.templateWizard;
+        console.log( templates );
         let isThereAnyCustomTemplates = false,
             activeIndex = '',
             defaultLayout = [],
@@ -71,6 +72,22 @@ class TemplateWizard extends React.Component {
             templates,
             options,
             activeIndex
+        });
+    }
+    /**
+    * saveTemplate()
+    */
+    saveTemplate() {
+        let template = this.state.templates[this.state.activeIndex]
+        this.props.saveTemplate({
+            activeIndex: template.id,
+            type: template.type,
+            options: template.options
+        });
+
+        this.setState({
+            isTemplateWizardOpen: false,
+            isThereAnyCustomTemplates: true
         });
     }
     /**
@@ -119,7 +136,11 @@ class TemplateWizard extends React.Component {
                             <Button type="primary" size="large" outline>
                                 PDF PREVIEW
                             </Button>
-                            <Button type="primary" size="large">
+                            <Button
+                                type="primary"
+                                size="large"
+                                onClick={() => { this.saveTemplate() }}
+                            >
                                 SAVE
                             </Button>
                         </div>
@@ -188,13 +209,16 @@ class TemplateWizard extends React.Component {
                 position="right"
             >
                 <div>
-                    {templates.map( ( template, index ) => (
-                        <a key={ index } href="#" onClick={() => { this.updateLayout(index, templates, template.type, template.options) }}>
-                            <div className={ cx( styles.boxRightSidebar, {
-                                [ styles.boxRightSidebarSelected ]: template.selected == true && index == activeIndex
-                            }) } />
-                        </a>
-                    ) )}
+                    {templates.map( ( template, index ) => {
+                        if (template.category !== 'default') return false;
+                        return (
+                            <a key={ index } href="#" onClick={() => { this.updateLayout(index, templates, template.type, template.options) }}>
+                                <div className={ cx( styles.boxRightSidebar, {
+                                    [ styles.boxRightSidebarSelected ]: template.selected == true && index == activeIndex
+                                }) } />
+                            </a>
+                        );
+                    })}
                 </div>
             </Sidebar>
         );
@@ -267,6 +291,7 @@ class TemplateWizard extends React.Component {
     }
     viewTemplates() {
         const { templates, defaultLayout } = this.state;
+
         const selectedActiveTemplateStyle = {
             width: '40px',
             height: '40px',
