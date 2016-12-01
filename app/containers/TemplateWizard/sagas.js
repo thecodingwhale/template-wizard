@@ -42,7 +42,16 @@ export function* saveTemplate( template ) {
     const request = yield postRequestSaveTemplate( template.payload );
     yield put({
         type: NEW_TEMPLATE_ADDED,
-        request: template.payload
+        request: template.payload,
+        payload: {
+            template: {
+                id: request.activeIndex,
+                category: request.category,
+                selected: request.selected,
+                options: template.payload.options,
+                type:template.payload.type
+            }
+        }
     });
 }
 

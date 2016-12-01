@@ -27,20 +27,20 @@ function templateWizardReducer( state = initialState, action ) {
                 fromJS(action.request.templates)
             );
         case NEW_TEMPLATE_ADDED:
-            return state.withMutations(map =>
-                map.updateIn([
-                        'templateWizard',
-                        'templates'
-                    ],
-                    templates => templates.push({
-                        id: action.request.activeIndex + 1, // this should return from the backend
-                        category: 'custom', // this should return from the backend
-                        selected: 1,
-                        options: action.request.options,
-                        type: action.request.type
-                    })
-                )
-            );
+            return state.withMutations(map => {
+                const indexOfTemplateToUpdate = map.getIn(['templateWizard','templates']).findIndex(template => {
+                    return template.get('selected') === 1;
+                });
+                map.setIn(['templateWizard', 'templates', indexOfTemplateToUpdate, 'selected'], false)
+                map.updateIn(['templateWizard','templates'], templates => templates.push({
+                    id: action.payload.template.id,
+                    category: action.payload.template.category,
+                    selected: action.payload.template.selected,
+                    options: action.payload.template.options,
+                    type: action.payload.template.type
+                }))
+                return map
+            });
         default:
             return state;
     }
