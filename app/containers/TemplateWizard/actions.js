@@ -2,7 +2,8 @@ import {
     DEFAULT_ACTION,
     LOAD_TEMPLATES,
     SAVE_TEMPLATE,
-    SET_ACTIVE_TEMPLATE
+    SET_ACTIVE_TEMPLATE,
+    OPEN_TEMPLATE_EDITOR
 } from './constants';
 
 /**
@@ -41,5 +42,11 @@ export function setActiveTemplate( templateId ) {
     return {
         payload: templateId,
         type: SET_ACTIVE_TEMPLATE
+    }
+}
+
+export function openTemplateEditor() {
+    return {
+        type: OPEN_TEMPLATE_EDITOR
     }
 }

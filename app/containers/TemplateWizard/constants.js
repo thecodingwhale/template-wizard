@@ -9,5 +9,6 @@ export const SAVE_TEMPLATE = 'app/TemplateWizard/SAVE_TEMPLATE';
 export const NEW_TEMPLATE_ADDED = 'app/TemplateWizard/NEW_TEMPLATE_ADDED';
 export const SET_ACTIVE_TEMPLATE = 'app/TemplateWizard/SET_ACTIVE_TEMPLATE';
 export const NEW_ACTIVE_TEMPLATE = 'app/TemplateWizard/NEW_ACTIVE_TEMPLATE';
-
+export const CUSTOM_TEMPLATES_ARE_AVAILABLE = 'app/TemplateWizard/CUSTOM_TEMPLATES_ARE_AVAILABLE';
+export const OPEN_TEMPLATE_EDITOR = 'app/TemplateWizard/OPEN_TEMPLATE_EDITOR';
 

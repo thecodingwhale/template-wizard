@@ -8,7 +8,8 @@ import {
     SAVE_TEMPLATE,
     NEW_TEMPLATE_ADDED,
     SET_ACTIVE_TEMPLATE,
-    NEW_ACTIVE_TEMPLATE
+    NEW_ACTIVE_TEMPLATE,
+    CUSTOM_TEMPLATES_ARE_AVAILABLE
 } from './constants';
 import {
     fetchPayslipTemplate,
@@ -21,6 +22,15 @@ import {
 */
 export function* loadTemplates() {
     const request = yield fetchPayslipTemplate();
+
+    for (let template of request.templates) {
+        if (template.category === 'custom') {
+            yield put({
+                type: CUSTOM_TEMPLATES_ARE_AVAILABLE
+            });
+        }
+    }
+
     yield put({
         type: TEMPLATES_LOADED,
         request

@@ -27,8 +27,6 @@ class TemplateWizard extends React.Component {
     constructor( props ) {
         super( props );
         this.state = {
-            isTemplateWizardOpen: false,
-            isThereAnyCustomTemplates: false,
             defaultLayout: '',
             options: [],
             templates: []
@@ -52,15 +50,11 @@ class TemplateWizard extends React.Component {
     componentWillReceiveProps( nextProps ) {
         const { templates } = nextProps.templateWizard;
 
-        let isThereAnyCustomTemplates = false,
-            activeIndex = '',
+        let activeIndex = '',
             defaultLayout = [],
             options = [];
 
         templates.map((template, index) => {
-            if (template.category == 'custom') {
-                isThereAnyCustomTemplates = true;
-            }
             if (template.selected) {
                 defaultLayout = template.type;
                 options = template.options;
@@ -70,7 +64,6 @@ class TemplateWizard extends React.Component {
 
         this.setState({
             defaultLayout,
-            isThereAnyCustomTemplates,
             templates,
             options,
             activeIndex
@@ -80,16 +73,11 @@ class TemplateWizard extends React.Component {
     * saveTemplate()
     */
     saveTemplate() {
-        let template = this.state.templates[this.state.activeIndex]
+        let template = this.state.templates[this.state.activeIndex];
         this.props.saveTemplate({
             activeIndex: template.id,
             type: template.type,
             options: template.options
-        });
-
-        this.setState({
-            isTemplateWizardOpen: false,
-            isThereAnyCustomTemplates: true
         });
     }
     /**
@@ -117,10 +105,7 @@ class TemplateWizard extends React.Component {
     */
     selectTemplate( e ) {
         e.preventDefault();
-        this.setState({
-            isTemplateWizardOpen: true,
-            isThereAnyCustomTemplates: false
-        });
+        this.props.openTemplateEditor();
     }
     /**
     * selectOption()
@@ -136,7 +121,7 @@ class TemplateWizard extends React.Component {
     */
     renderTopBar() {
         // let title = <FormattedMessage { ...messages.header } />;
-        const { isTemplateWizardOpen, isThereAnyCustomTemplates } = this.state;
+        const { isTemplateWizardOpen, isThereAnyCustomTemplates } = this.props.templateWizard;
         return (
             <div>
                 <TopBar title="Template Wizard">
@@ -172,7 +157,14 @@ class TemplateWizard extends React.Component {
     * renderLeftSidebar()
     */
     renderLeftSidebar() {
-        const { templates, options } = this.state;
+        let options = [];
+
+        this.props.templateWizard.templates.map(template => {
+            if ( template.selected == 1 ) {
+                options = template.options;
+            }
+        });
+
 
         return (
             <Sidebar>
@@ -211,7 +203,9 @@ class TemplateWizard extends React.Component {
     * renderRightSidebar()
     */
     renderRightSidebar() {
-        const { templates, defaultLayout, activeIndex } = this.state;
+        const { activeIndex } = this.state;
+        const { templates } = this.props.templateWizard;
+
         return (
             <Sidebar
                 title="Templates"
@@ -368,7 +362,7 @@ class TemplateWizard extends React.Component {
     render() {
         const { isTemplateWizardOpen,
             isThereAnyCustomTemplates
-        } = this.state;
+        } = this.props.templateWizard;
 
         return (
             <div className={ styles.templateWizard } onKeyPress={ this.handleKeyPress }>
