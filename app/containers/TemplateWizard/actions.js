@@ -1,7 +1,8 @@
 import {
     DEFAULT_ACTION,
     LOAD_TEMPLATES,
-    SAVE_TEMPLATE
+    SAVE_TEMPLATE,
+    SET_ACTIVE_TEMPLATE
 } from './constants';
 
 /**
@@ -29,5 +30,16 @@ export function saveTemplate(template) {
     return {
         payload: template,
         type: SAVE_TEMPLATE
+    }
+}
+
+/**
+ * setActiveTemplate()
+ */
+
+export function setActiveTemplate( templateId ) {
+    return {
+        payload: templateId,
+        type: SET_ACTIVE_TEMPLATE
     }
 }

@@ -7,11 +7,13 @@ import {
     TEMPLATES_LOADED,
     SAVE_TEMPLATE,
     NEW_TEMPLATE_ADDED,
-
+    SET_ACTIVE_TEMPLATE,
+    NEW_ACTIVE_TEMPLATE
 } from './constants';
 import {
     fetchPayslipTemplate,
-    postRequestSaveTemplate
+    postRequestSaveTemplate,
+    postSetActiveTemplate
 } from './api';
 
 /**
@@ -64,7 +66,28 @@ export function* watchForSaveTemplate() {
     }
 }
 
+/**
+* setActiveTemplate()
+*/
+export function* setActiveTemplate( params ) {
+    const request = yield postSetActiveTemplate( params );
+    yield put({
+        type: NEW_ACTIVE_TEMPLATE,
+        payload: request.template
+    });
+}
+
+/**
+* watchForSaveTemplate()
+*/
+export function* watchForSetActiveTemplate() {
+    while ( true ) { // eslint-disable-line no-constant-condition
+        yield takeEvery( SET_ACTIVE_TEMPLATE, setActiveTemplate);
+    }
+}
+
 export default [
     watchForLoadTemplates,
-    watchForSaveTemplate
+    watchForSaveTemplate,
+    watchForSetActiveTemplate
 ];

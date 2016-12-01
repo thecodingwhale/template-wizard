@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { fromJS } from 'immutable';
+import keydown from 'react-keydown';
 // import { FormattedMessage } from 'react-intl';
 import selectTemplateWizard from './selectors';
 import * as TemplateWizardActions from './actions';
@@ -37,6 +38,7 @@ class TemplateWizard extends React.Component {
         this.updateLayout = this.updateLayout.bind( this );
         this.updateOptionSetting = this.updateOptionSetting.bind( this );
         this.saveTemplate = this.saveTemplate.bind( this );
+        this.setActiveTemplate = this.setActiveTemplate.bind( this );
     }
     /**
     * componentDidMount()
@@ -49,7 +51,7 @@ class TemplateWizard extends React.Component {
     */
     componentWillReceiveProps( nextProps ) {
         const { templates } = nextProps.templateWizard;
-        console.log( templates );
+
         let isThereAnyCustomTemplates = false,
             activeIndex = '',
             defaultLayout = [],
@@ -91,6 +93,12 @@ class TemplateWizard extends React.Component {
         });
     }
     /**
+    * setActiveTemplate()
+    */
+    setActiveTemplate( templateId ) {
+        this.props.setActiveTemplate( templateId );
+    }
+    /**
     * updateLayout()
     */
     updateLayout( index, templates, layout, options ) {
@@ -110,7 +118,8 @@ class TemplateWizard extends React.Component {
     selectTemplate( e ) {
         e.preventDefault();
         this.setState({
-            isTemplateWizardOpen: true
+            isTemplateWizardOpen: true,
+            isThereAnyCustomTemplates: false
         });
     }
     /**
@@ -149,7 +158,7 @@ class TemplateWizard extends React.Component {
                     {isThereAnyCustomTemplates
                         ? (
                             <div>
-                                <Button type="primary" size="large">
+                                <Button type="primary" size="large" onClick={ this.selectTemplate }>
                                     CREATE NEW TEMPLATE
                                 </Button>
                             </div>
@@ -290,7 +299,7 @@ class TemplateWizard extends React.Component {
         );
     }
     viewTemplates() {
-        const { templates, defaultLayout } = this.state;
+        const { templates } = this.props.templateWizard;
 
         const selectedActiveTemplateStyle = {
             width: '40px',
@@ -330,7 +339,7 @@ class TemplateWizard extends React.Component {
                                     float: 'left'
                                 }}
                                 key={ index }
-                                onClick={() => { this.updateLayout(index, templates, template.type, template.options) }}
+                                onClick={() => { this.setActiveTemplate(template.id) }}
                             >
                                 <a href="#" >
                                     <div
@@ -362,7 +371,7 @@ class TemplateWizard extends React.Component {
         } = this.state;
 
         return (
-            <div className={ styles.templateWizard }>
+            <div className={ styles.templateWizard } onKeyPress={ this.handleKeyPress }>
                 <Helmet
                     title="TemplateWizard"
                     meta={ [
@@ -397,4 +406,4 @@ function mapDispatchToProps( dispatch ) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)( TemplateWizard );
+)( keydown(TemplateWizard) );
