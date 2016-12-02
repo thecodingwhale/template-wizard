@@ -6,7 +6,8 @@ import {
     NEW_ACTIVE_TEMPLATE,
     CUSTOM_TEMPLATES_ARE_AVAILABLE,
     OPEN_TEMPLATE_EDITOR,
-    SELECT_OPTION
+    SELECT_OPTION,
+    SELECT_TEMPLATE
 } from './constants';
 
 const initialState = fromJS({
@@ -25,6 +26,18 @@ function templateWizardReducer( state = initialState, action ) {
     switch ( action.type ) {
         case DEFAULT_ACTION:
             return state;
+        case SELECT_TEMPLATE:
+            return state.withMutations(map => {
+                let indexOfCurrentActiveToUpdate = map.getIn(['templateWizard','templates']).findIndex(template => {
+                    return template.get('selected') === 1;
+                });
+                let indexOfNewActiveTemplateToUpdate = map.getIn(['templateWizard','templates']).findIndex(template => {
+                    return template.get('id') === action.payload.templateId;
+                });
+                map.setIn(['templateWizard', 'templates', indexOfCurrentActiveToUpdate, 'selected'], 0)
+                map.setIn(['templateWizard', 'templates', indexOfNewActiveTemplateToUpdate, 'selected'], 1)
+                return map
+            });
         case SELECT_OPTION:
             return state.withMutations(map => {
                 const indexOfTemplate = map.getIn(['templateWizard','templates']).findIndex(template => {

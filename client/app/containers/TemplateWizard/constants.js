@@ -12,3 +12,4 @@ export const NEW_ACTIVE_TEMPLATE = 'app/TemplateWizard/NEW_ACTIVE_TEMPLATE';
 export const CUSTOM_TEMPLATES_ARE_AVAILABLE = 'app/TemplateWizard/CUSTOM_TEMPLATES_ARE_AVAILABLE';
 export const OPEN_TEMPLATE_EDITOR = 'app/TemplateWizard/OPEN_TEMPLATE_EDITOR';
 export const SELECT_OPTION = 'app/TemplateWizard/SELECT_OPTION';
+export const SELECT_TEMPLATE = 'app/TemplateWizard/SELECT_TEMPLATE';

@@ -89,15 +89,9 @@ class TemplateWizard extends React.Component {
     /**
     * updateLayout()
     */
-    updateLayout( index, templates, layout, options ) {
-        templates[this.state.activeIndex].selected = false;
-        templates[index].selected = true;
-
-        this.setState({
-            defaultLayout: layout,
-            activeIndex: index,
-            options,
-            templates
+    updateLayout( templateId ) {
+        this.props.selecteTemplateLayout({
+            templateId
         });
     }
     /**
@@ -224,7 +218,13 @@ class TemplateWizard extends React.Component {
                     {templates.map( ( template, index ) => {
                         if (template.category !== 'default') return false;
                         return (
-                            <a key={ index } href="#" onClick={() => { this.updateLayout(index, templates, template.type, template.options) }}>
+                            <a
+                                key={ index }
+                                href="#"
+                                onClick={() => {
+                                    this.updateLayout( template.id )
+                                }}
+                            >
                                 <div className={ cx( styles.boxRightSidebar, {
                                     [ styles.boxRightSidebarSelected ]: template.selected == true && index == activeIndex
                                 }) } />
