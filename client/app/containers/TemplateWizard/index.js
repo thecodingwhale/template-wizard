@@ -187,7 +187,6 @@ class TemplateWizard extends React.Component {
             >
                 <div>
                     {templates.map( ( template, index ) => {
-                        if (template.category !== 'default') return false;
                         return (
                             <a
                                 key={ index }
@@ -323,7 +322,10 @@ class TemplateWizard extends React.Component {
                                     float: 'left'
                                 }}
                                 key={ index }
-                                onClick={() => { this.setActiveTemplate(template.id) }}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    this.setActiveTemplate(template.id);
+                                }}
                             >
                                 <a href="#" >
                                     <div

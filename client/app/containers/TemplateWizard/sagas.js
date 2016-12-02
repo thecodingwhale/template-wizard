@@ -79,8 +79,8 @@ export function* watchForSaveTemplate() {
 /**
 * setActiveTemplate()
 */
-export function* setActiveTemplate( params ) {
-    const request = yield postSetActiveTemplate( params );
+export function* setActiveTemplate( templateId ) {
+    const request = yield postSetActiveTemplate( templateId );
     yield put({
         type: NEW_ACTIVE_TEMPLATE,
         payload: request.template

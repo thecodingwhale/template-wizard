@@ -92,7 +92,7 @@ class PayslipWizardController extends Controller
 
         return $this->jsonResponse([
             'activeIndex' => $template->id,
-            'selected' => true,
+            'selected' => 1,
             'category' => $template->category
         ]);
     }
