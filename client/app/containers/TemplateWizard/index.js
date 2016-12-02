@@ -26,12 +26,6 @@ class TemplateWizard extends React.Component {
     */
     constructor( props ) {
         super( props );
-        this.state = {
-            defaultLayout: '',
-            options: [],
-            templates: []
-        };
-
         this.selectTemplate = this.selectTemplate.bind( this );
         this.updateLayout = this.updateLayout.bind( this );
         this.updateOptionSetting = this.updateOptionSetting.bind( this );
@@ -45,40 +39,18 @@ class TemplateWizard extends React.Component {
         this.props.loadTemplates();
     }
     /**
-    * componentWillReceiveProps()
-    */
-    componentWillReceiveProps( nextProps ) {
-        const { templates } = nextProps.templateWizard;
-
-        let activeIndex = '',
-            defaultLayout = [],
-            options = [];
-
-        templates.map((template, index) => {
-            if (template.selected) {
-                defaultLayout = template.type;
-                options = template.options;
-                activeIndex = index;
-            }
-        });
-
-        this.setState({
-            defaultLayout,
-            templates,
-            options,
-            activeIndex
-        });
-    }
-    /**
     * saveTemplate()
     */
     saveTemplate() {
-        let template = this.state.templates[this.state.activeIndex];
-        this.props.saveTemplate({
-            activeIndex: template.id,
-            type: template.type,
-            options: template.options
-        });
+        this.props.templateWizard.templates.map(template => {
+            if (template.selected === 1) {
+                this.props.saveTemplate({
+                    activeIndex: template.id,
+                    type: template.type,
+                    options: template.options
+                });
+            }
+        })
     }
     /**
     * setActiveTemplate()
@@ -206,7 +178,6 @@ class TemplateWizard extends React.Component {
     * renderRightSidebar()
     */
     renderRightSidebar() {
-        const { activeIndex } = this.state;
         const { templates } = this.props.templateWizard;
 
         return (
@@ -226,7 +197,7 @@ class TemplateWizard extends React.Component {
                                 }}
                             >
                                 <div className={ cx( styles.boxRightSidebar, {
-                                    [ styles.boxRightSidebarSelected ]: template.selected == true && index == activeIndex
+                                    [ styles.boxRightSidebarSelected ]: template.selected
                                 }) } />
                             </a>
                         );
@@ -253,6 +224,16 @@ class TemplateWizard extends React.Component {
             boxSizing: 'border-box',
             float: 'left'
         };
+        let options = [];
+        let layout;
+
+        this.props.templateWizard.templates.map(template => {
+            if ( template.selected == 1 ) {
+                options = template.options;
+                layout = template.type
+            }
+        });
+
         return (
             <div>
                 { this.renderTopBar() }
@@ -271,8 +252,8 @@ class TemplateWizard extends React.Component {
                             } }
                         >
                             <Payslip
-                                layout={ this.state.defaultLayout }
-                                options={ this.state.options }
+                                layout={ layout }
+                                options={ options }
                             />
                         </div>
                     </div>
