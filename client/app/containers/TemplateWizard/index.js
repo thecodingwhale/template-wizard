@@ -110,10 +110,11 @@ class TemplateWizard extends React.Component {
     /**
     * selectOption()
     */
-    updateOptionSetting( options, optionId, index ) {
-        options[optionId - 1].settings[index - 1].selected = !options[optionId - 1].settings[index - 1].selected;
-        this.setState({
-            options: options
+    updateOptionSetting( templateId, optionId, settingId ) {
+        this.props.selectOptionSetting({
+            templateId,
+            optionId,
+            settingId
         });
     }
     /**
@@ -158,13 +159,14 @@ class TemplateWizard extends React.Component {
     */
     renderLeftSidebar() {
         let options = [];
+        let templateId;
 
         this.props.templateWizard.templates.map(template => {
             if ( template.selected == 1 ) {
                 options = template.options;
+                templateId = template.id
             }
         });
-
 
         return (
             <Sidebar>
@@ -186,7 +188,14 @@ class TemplateWizard extends React.Component {
                                             type = "primary"
                                         }
                                         return (
-                                            <Button size="small" key={ index } type={ type } onClick={() => { this.updateOptionSetting(options, option.id, index + 1) }}>
+                                            <Button
+                                                size="small"
+                                                key={ index }
+                                                type={ type }
+                                                onClick={() => {
+                                                    this.updateOptionSetting(templateId, option.id, setting.id)
+                                                }}
+                                            >
                                                 { setting.name }
                                             </Button>
                                         )

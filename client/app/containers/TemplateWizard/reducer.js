@@ -5,7 +5,8 @@ import {
     NEW_TEMPLATE_ADDED,
     NEW_ACTIVE_TEMPLATE,
     CUSTOM_TEMPLATES_ARE_AVAILABLE,
-    OPEN_TEMPLATE_EDITOR
+    OPEN_TEMPLATE_EDITOR,
+    SELECT_OPTION
 } from './constants';
 
 const initialState = fromJS({
@@ -24,6 +25,21 @@ function templateWizardReducer( state = initialState, action ) {
     switch ( action.type ) {
         case DEFAULT_ACTION:
             return state;
+        case SELECT_OPTION:
+            return state.withMutations(map => {
+                const indexOfTemplate = map.getIn(['templateWizard','templates']).findIndex(template => {
+                    return template.get('id') === action.payload.templateId;
+                });
+                const indexOfTemplateOption = map.getIn(['templateWizard','templates', indexOfTemplate, 'options']).findIndex(option => {
+                    return option.get('id') === action.payload.optionId;
+                });
+                const indexOfTemplateOptionSetting = map.getIn(['templateWizard','templates', indexOfTemplate, 'options', indexOfTemplateOption, 'settings']).findIndex(setting => {
+                    return setting.get('id') === action.payload.settingId;
+                });
+                const selected = map.getIn(['templateWizard','templates', indexOfTemplate, 'options', indexOfTemplateOption, 'settings', indexOfTemplateOptionSetting, 'selected'])
+                map.setIn(['templateWizard','templates', indexOfTemplate, 'options', indexOfTemplateOption, 'settings', indexOfTemplateOptionSetting, 'selected'], !selected)
+                return map
+            });
         case OPEN_TEMPLATE_EDITOR:
             return state.withMutations(map => {
                 map.setIn(['templateWizard', 'isTemplateWizardOpen'], true);

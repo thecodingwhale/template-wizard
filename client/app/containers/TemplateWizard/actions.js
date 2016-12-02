@@ -3,7 +3,8 @@ import {
     LOAD_TEMPLATES,
     SAVE_TEMPLATE,
     SET_ACTIVE_TEMPLATE,
-    OPEN_TEMPLATE_EDITOR
+    OPEN_TEMPLATE_EDITOR,
+    SELECT_OPTION
 } from './constants';
 
 /**
@@ -48,5 +49,12 @@ export function setActiveTemplate( templateId ) {
 export function openTemplateEditor() {
     return {
         type: OPEN_TEMPLATE_EDITOR
+    }
+}
+
+export function selectOptionSetting( payload ) {
+    return {
+        type: SELECT_OPTION,
+        payload
     }
 }
